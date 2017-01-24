@@ -1,3 +1,7 @@
 cd Desktop
 cd DojoAssignments
 git init
+git add .
+git commit -m “initialized DojoAssignments repository”
+git remote origin https://github.com/carolynyen/DojoAssignments.git
+git push origin master
