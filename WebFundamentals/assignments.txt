@@ -1,0 +1,15 @@
+Carolyns-MacBook-Pro:WebFundamentals carolynyen1$ ls -R
+CSS		HTML		about.txt
+Git		Javascript	assignments.txt
+
+./CSS:
+about.txt
+
+./Git:
+about.txt
+
+./HTML:
+about.txt		indentation.html
+
+./Javascript:
+about.txt
