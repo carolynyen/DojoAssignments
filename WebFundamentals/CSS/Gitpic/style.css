@@ -1,0 +1,45 @@
+*{
+ margin: 0px;
+ padding: 0px;
+}
+#wrapper{
+ width: 950px;
+ background-color: #CFC7A7;
+ margin: 0px auto;
+}
+#header{
+}
+.img1{
+ height: 50px;
+ width: 20px;
+ display: inline-block;
+ position: relative;
+ margin: 10px;
+}
+.img2{
+ height: 50px;
+ width: 20px;
+ display: inline-block;
+ position: relative;
+}
+.text1{
+ height: 50px;
+ width: 20px;
+ display: inline-block;
+ position: relative;
+}
+#navigation{
+ height: 300px;
+ width: 200px;
+}
+#main_content{
+ height: 400px;
+ width: 700px;
+}
+.subcontents{
+ height: 200px;
+ width: 210px;
+}
+#advertisement{
+ height: 120px;
+ width: 660px;

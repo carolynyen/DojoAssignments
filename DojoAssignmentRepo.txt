@@ -5,3 +5,8 @@ git add .
 git commit -m “initialized DojoAssignments repository”
 git remote origin https://github.com/carolynyen/DojoAssignments.git
 git push origin master
+touch readme.md
+git status
+git add .
+git commit -m “added readme.md”
+git push origin master
