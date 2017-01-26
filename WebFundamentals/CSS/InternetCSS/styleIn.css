@@ -1,0 +1,129 @@
+*{
+ margin: 0px;
+ padding: 0px;
+}
+.header{
+	background-color: white;
+}
+.int{
+	display: inline-block;
+	margin-top: 28px;
+	vertical-align: top;
+	font-family: arial;
+	font-size: 46px;
+}
+.header2{
+	background: linear-gradient(#1F70A5,#5A8EAA,#1F70A5);
+	color: white;
+	height: 48px;
+	width: 980px;
+	font-family: arial;
+	font-size: 32px;
+	padding: 10px 1px 1px 20px;
+	margin-top: -22px;
+}
+.mainbody{
+	background: linear-gradient(#ECEDED,white,white,white);
+	height: 700px;
+	width: 1000px;
+}
+.leftside{
+	font-family: arial;
+	height: 190px;
+	width: 190px;
+	background-color: transparent;
+	padding: 20px 1px 1px 10px;
+	border-bottom-style: solid;
+	border-color: #A5A5A7;
+	border-width: 2px;
+	display: inline-block;
+}
+.topright{
+	font-family: arial;
+	font-size: 16px;
+	height:60px;
+	width:720px;
+	padding: 10px 0px 0px 0px;
+	vertical-align: top;
+	display: inline-block;
+	margin-left: 50px;
+	border-bottom-style: solid;
+	border-color: #A5A5A7;
+	border-width: 2px;
+}
+.phone{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 430px;
+}
+.phonenum{
+	margin-left: 14px;
+	font-size: 11px;
+	color: gray;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: -5px;
+}
+.blue{
+	margin-left: -8px;
+	font-size: 26px;
+	color: #20BDD8;
+}
+.blue2{
+	color: #20BDD8;
+}
+.ninja{
+	margin-top: 20px;
+	height: 270px;
+	width: 160px;
+	background-image: url("file:///Users/carolynyen1/Desktop/DojoAssignments/WebFundamentals/CSS/InternetCSS/images/ad_background.png");
+	display: inline-block;
+	color: white;
+	font-family: arial;
+	box-shadow: 1px 2px 4px #444445;
+	text-align: center;
+	padding: 20px 20px 0px 20px;
+	font-size: 20px;
+}
+.clients{
+	color: black;
+	font-size: 14px;
+	height: 300px;
+	width:720px;
+	display: inline-block;
+	margin-top: 18px;
+	background-color: transparent;
+}
+.midlist ul{
+	margin: 8px 34px 0px 32px;
+}
+.midlist ul li{ 
+	margin: 5px;
+}
+.bottomlist ol{
+	margin: 5px 16px 0px 36px;
+}
+.bottomlist ol li{
+	margin: 5px;
+}
+.bottombox{
+	margin: 10px 0px 0px 0px;
+	padding: 12px 0px 0px 14px;
+	color: black;
+	font-size: 13px;
+	border-style: solid;
+	border-color: #0598F2;
+	height: 116px;
+	width: 700px;
+	border-width: 3px;
+	background-color: white;
+	border-bottom-style: none;
+	box-shadow: 6px 0px 6px -4px #444445;
+}
+.text{
+	font-size: 14px;
+	display:inline-block; 
+	vertical-align:top; 
+	margin-left:20px;
+	width:550px;
+}
