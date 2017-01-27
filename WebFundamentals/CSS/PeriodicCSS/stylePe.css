@@ -1,0 +1,51 @@
+*{
+ margin: 0px;
+ padding: 0px;
+}
+.wrapper{
+	vertical-align: top;
+	padding: 14px 10px 10px 14px;
+	color: red;
+	font-family: arial;
+	font-size: 12px;
+	width:1140px;
+	height:740px;
+	background-color: #ECECEC;
+}
+.wrapper ul{
+	display: inline-block;
+	vertical-align: top;
+}
+.wrapper ul li{
+	vertical-align: top;
+	display: inline-block;
+	margin-right: 42px;
+}
+.second{
+	margin: 20px 0 3px 20px;
+}
+.third{
+	margin-left: 20px;
+}
+.thirdandmore{
+	margin: 3px 0 3px 20px;
+}
+.block{
+	height: 50px;
+	font-size: 11px;
+	width: 50px;
+	vertical-align: top;
+	display: inline-block;
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	margin-left: 0px;
+	color: blue;
+	text-align: center;
+}
+.eight{
+	margin: 30px 0 0 46px;
+}
+.nine{
+	margin: 3px 0 0 55px;
+}
