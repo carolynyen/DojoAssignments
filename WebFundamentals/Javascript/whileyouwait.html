@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+   <body>
+   </body>
+   <script type="text/javascript">
+      var daysUntilMyBirthday = 0;
+      function birthday(daysUntilMyBirthday){
+         for (var num = daysUntilMyBirthday; num >= 0; num --) {
+            if (num > 30){
+               console.log('boo.', num, 'days until your birthday');
+            }
+            else if (num <= 30 && num > 5) {
+               console.log('It is almost your birthday! Just', num, 'days!');
+            }
+            else if(num <= 5 && num > 0){
+               console.log('it is right here! YAY! Just', num, 'days.');
+            }
+            else{
+               console.log('♪ღ♪░H░A░P░P░Y░ B░I░R░T░H░D░A░Y░░♪ღ♪')
+            }
+         }
+         return;
+      }
+   </script>
+</html>
