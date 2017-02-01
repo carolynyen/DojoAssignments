@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>jQuery Functions</title>
+  <body>
+    <div class="header">
+      <div><input type=button value="click" id="click"> <p id="hi">Click the button to say hi</p></div>
+      <div><input type=button value="hide" id="hide"> <p>Click the button to hide the button</p></div>
+      <div><input type=button value="show" id="show"> <p>Click the button to show something <p id="surprise" style="display:none;"> <b>&nbsp;SURPRISE!</b> </p></p></div>
+      <div><input type=button value="toggle" id="toggle"> <p>Click the button to toggle an image &nbsp;</p>
+      <img id="toggleimg" src="http://placekitten.com/g/200/200" height=50 width=50 alt="kitty"></img></div>
+      <div><input type=button value="slideDown" id="slidedown"> <p>Click the button to slide down a green box</p><div id="slider" style="display:none;"></div></div>
+      <div><input type=button value="slideUp" id="slideup"> <p>Click the button to slide up that green box</p><div id="slider" style="display:none;"></div></div>
+      <div><input type=button value="slideToggle" id="slidetoggle"> <p>Click the button to slide toggle a hidden image &nbsp;</p><img id="toggleslideimg" src="http://placekitten.com/g/200/200" height=50 width=50 alt="kitty"></img></div>
+      <div><input type=button value="fadeIn" id="fadein"> <p>Click the button to fade in some text</p><p id="fadetext" style="display:none;"> &nbsp;SURPRISE FADING TEXT! </p></div>
+      <div><input type=button value="fadeOut" id="fadeout"> <p>Click the button to fade out that text</p></div>
+      <div><input type=button value="addClass" id="addclass"> <p id="red">Click the button to add class 'red' to this paragraph</p></div>
+      <div><input type=button value="before" id="before"> <p>Click the button to add text before the button</p></div>
+      <div><input type=button value="after" id="after"> <p>Click the button to add text after the button</p></div>
+      <div><input type=button value="append" id="append"> <p id="appendtext">Click the button to append text after this.</p></div>
+      <div><input type=button value="html" id="html"> <p id="htmlreplace">Click the button to replace this text with html from the surprise from the Show button</p></div>
+      <div><input type=button value="attr" id="attr"> <p>Click the button to find the attribute title of <p title="weird blue text" id="attributetext"> &nbsp;this text</p></p></div>
+      <div><input type=button value="val" id="val"> <p>Click the button to find out the value of this button</p></div>
+      <div><input type=button value="text" id="text"> <p id="replacetext">Click the button to replace this text</p></div>
+      <div><input type=button value="data" id="data"> <p>Click the button to pull a name from a database</p><span>&nbsp;<p id="firstone"></p>&nbsp;<p id="secondone"> </p></span></div>
+  </div>
+  </body>
+  <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script type="text/javascript">
+      $('#click').click(function(){
+        $('#hi').text('HIIIIIII');
+      });
+      $('#hide').click(function(){
+        $(this).hide(function(){});
+      });
+      $('#show').click(function(){
+        $('#surprise').show("slow");
+      });
+      $('#toggle').click(function(){
+        $('#toggleimg').toggle();
+      });
+      $('#slidedown').click(function(){
+        $('#slider').slideDown();
+      });
+      $('#slideup').click(function(){
+        $('#slider').slideUp();
+      });
+      $('#slidetoggle').click(function(){
+        $('#toggleslideimg').slideToggle();
+      });
+      $('#fadein').click(function(){
+        $('#fadetext').fadeIn();
+      });
+      $('#fadeout').click(function(){
+        $('#fadetext').fadeOut();
+      });
+      $('#addclass').click(function(){
+        $('#red').addClass("redtext");
+      });
+      $('#before').click(function(){
+        $(this).before(" TEXT! ");
+      });
+      $('#after').click(function(){
+        $(this).after(" TEXT! ");
+      });
+      $('#append').click(function(){
+        $('#appendtext').append(" HEY!");
+      });
+      $('#html').click(function(){
+        var htmlstring = $('#surprise').html();
+        $('#htmlreplace').text(htmlstring);
+      });
+      $('#attr').click(function(){
+        var title = $('#attributetext').attr("title");
+        $('#attributetext').after(' (This has the title of "', title, '")');
+      });
+      $('#val').click(function(){
+        var value = $(this).val();
+        $(this).after(' (This button of course has the value of "', value, '")');
+      });
+      $('#text').click(function(){
+        $('#replacetext').text('I have replaced this text!');
+      });
+      $('#data').click(function(){
+        $('span').data("names", [{firstname: "Car", lastname: "Ye"}, {firstname: "Jo", lastname: "Ya"}]);
+        $('#firstone').text($('span').data("names")[0].firstname);
+        $('#secondone').text($('span').data("names")[1].lastname);
+      });
+  </script>
+  <style>
+    .header p{
+      display: inline-block;
+    }
+    .header img{
+      display: none;
+    }
+    #slider{
+      background-color: green;
+      height: 50px;
+      width: 50px;
+    }
+    .redtext{
+      color: red;
+    }
+    #attributetext{
+      color: blue;
+    }
+  </style>
+</head>
+</html>

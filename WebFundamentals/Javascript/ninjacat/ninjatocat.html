@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Ninja to Cat</title>
+  <body>
+    <div class="body">
+        <img src="ninja0.png" data-alt-src="cat0.png" alt="ninja0">
+        <img src="ninja1.png" data-alt-src="cat1.png" alt="ninja1">
+        <img src="ninja2.png" data-alt-src="cat2.png" alt="ninja2">
+        <img src="ninja3.png" data-alt-src="cat3.png" alt="ninja3">
+        <img src="ninja4.png" data-alt-src="cat4.png" alt="ninja4">
+    </div>
+  </body>
+  <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script type="text/javascript">
+      $('img').click(function(){
+        $(this).fadeOut();
+        $(this).attr("src", $(this).attr("data-alt-src"));
+        $(this).fadeIn();
+      });
+  </script>
+  <style>
+  .body{
+    margin-top: 20px;
+  }
+  .body img{
+    height: 50px;
+    width: 180px;
+    display: block;
+    margin: 0px 0px 5px 400px;
+  }
+  .button{
+    background-color: green;
+    color: white;
+    margin-left: 300px;
+  }
+  </style>
+</head>
+</html>

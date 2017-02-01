@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Disappearing Ninja</title>
+  <body>
+    <div class="header">
+      <p>jQuery Assignment 1</p>
+      <div>
+        <img src="ninja.png" alt="ninja">
+        <img src="ninja.png" alt="ninja">
+        <img src="ninja.png" alt="ninja">
+        <img src="ninja.png" alt="ninja">
+      </div>
+      <div>
+        <img src="ninja.png" alt="ninja">
+        <img src="ninja.png" alt="ninja">
+        <img src="ninja.png" alt="ninja">
+        <img src="ninja.png" alt="ninja">
+      </div>
+      <input id="button" class="button" type="button" value="Restore">
+    </div>
+  </body>
+  <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script type="text/javascript">
+      $('img').click(function(){
+        $(this).fadeOut();
+      });
+      $('#button').click(function(){
+        $('img').fadeIn();
+      });
+  </script>
+  <style>
+  .header img{
+    height: 200px;
+    width: 160px;
+    border-style: solid;
+    border-color: black;
+    display: inline-block;
+  }
+  .button{
+    background-color: green;
+    color: white;
+    margin-left: 300px;
+  }
+  .header p {
+    margin-left: 240px;
+  }
+  </style>
+</head>
+</html>
