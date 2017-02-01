@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Hovering Ninja</title>
+  <body>
+    <div class="header">
+      <div>
+        <img src="ninja.png" data-alt-src="dojocat.jpg" alt="ninja">
+        <img src="ninja.png" data-alt-src="dojocat.jpg" alt="ninja">
+        <img src="ninja.png" data-alt-src="dojocat.jpg" alt="ninja">
+        <img src="ninja.png" data-alt-src="dojocat.jpg" alt="ninja">
+      </div>
+      <div>
+        <img src="ninja.png" data-alt-src="dojocat.jpg" alt="ninja">
+        <img src="ninja.png" data-alt-src="dojocat.jpg" alt="ninja">
+        <img src="ninja.png" data-alt-src="dojocat.jpg" alt="ninja">
+        <img src="ninja.png" data-alt-src="dojocat.jpg" alt="ninja">
+      </div>
+    </div>
+  </body>
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script type="text/javascript">
+    $('img').hover(function(){
+      $(this).toggle();
+      var oldpic= $(this).attr("src")
+      $(this).attr("src", $(this).attr("data-alt-src"));
+      $(this).attr("data-alt-src", oldpic);
+      $(this).toggle();
+    }, function(){
+      $(this).toggle();
+      var oldpic= $(this).attr("src")
+      $(this).attr("src", $(this).attr("data-alt-src"));
+      $(this).attr("data-alt-src", oldpic);
+      $(this).toggle();
+    });
+  </script>
+  <style>
+  .header img{
+    height: 200px;
+    width: 160px;
+    border-style: solid;
+    border-color: black;
+    display: inline-block;
+  }
+  </style>
+</head>
+</html>
