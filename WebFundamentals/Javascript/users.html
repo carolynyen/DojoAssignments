@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Users Form Practice</title>
+  <body>
+    <div class="header">
+    <table>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email Address</th>
+        <th>Contact#</th>
+      </tr>
+    </table>
+  </div>
+    <p>New User</p>
+    <form action="process.php" method='post' id="form">
+      First Name:<input type="text" id='first' name="firstname"><br>
+      Last Name:<input type="text" id="last" name="lastname"><br>
+      Email Address:<input type="text" id="email" name="email"><br>
+      Phone No.:<input type="text" id="phone" name="contact"><br>
+      <input type=submit value="Add User">
+    </form>
+  </body>
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('form').submit(function(){
+        var firstname = $('#first').val();
+        var lastname = $('#last').val();
+        var email = $('#email').val();
+        var phone = $('#phone').val();
+        $('table').children().append("<tr><td>" + firstname + "</td><td>" + lastname + "</td><td>" + email + "</td><td>" + phone + "</td></tr>");
+        return false;
+      });
+    });
+  </script>
+  <style>
+  .header th{
+    border-style: solid;
+    border-color: black;
+  }
+  .header td{
+    border-style: solid;
+    border-color: black;
+  }
+  p{
+    font-size: 14px;
+    width:300px;
+    border-bottom-style: solid;
+    border-bottom-color: gray;
+    border-bottom-width: 2px;
+  }
+  </style>
+</head>
+</html>

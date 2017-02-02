@@ -15,7 +15,9 @@
   <script type="text/javascript">
       $('img').click(function(){
         $(this).fadeOut();
+        var oldpic = $(this).attr("src");
         $(this).attr("src", $(this).attr("data-alt-src"));
+        $(this).attr("data-alt-src", oldpic);
         $(this).fadeIn();
       });
   </script>

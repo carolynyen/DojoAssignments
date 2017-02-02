@@ -1,0 +1,12 @@
+#pokemon-images{
+    width: 70%;
+    display: inline-block;
+}
+#pokedex{
+    background-color: white;
+    border: 20px solid red;
+    width: 20%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 0 10px 10px;
+}
