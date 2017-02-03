@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Game of Thrones</title>
+    <style media="screen">
+      img{
+        width: 300px;
+        height: 200px;
+        display: inline-block;
+      }
+      #houses{
+        display: block;
+        height: 300px;
+        width: 300px;
+        border: 3px solid red;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      var housewords = "hi";
+      $('#targ').click(function(){
+        housewords = "Fire and Blood";
+        $.get("http://anapioficeandfire.com/api/houses?words="+housewords, function(res) {
+          $('#houses').html("<p>Name: "+res[0].name+"</p>"+"<p>Words: "+res[0].words+"</p>"
+          + "<p>Name: "+res[0].name+"</p>" + "<p>Titles: "+res[0].titles+" </p>");
+          }, "json");
+      });
+      $('#baratheon').click(function(){
+        housewords = "Ours Is The Fury";
+        $.get("http://anapioficeandfire.com/api/houses?words="+housewords, function(res) {
+          $('#houses').html("<p>Name: "+res[0].name+"</p>"+"<p>Words: "+res[0].words+"</p>"
+          + "<p>Name: "+res[0].name+"</p>" + "<p>Titles: "+res[0].titles+" </p>");
+          }, "json");
+      });
+      $('#stark').click(function(){
+        housewords = "Winter is Coming";
+        $.get("http://anapioficeandfire.com/api/houses?words="+housewords, function(res) {
+          $('#houses').html("<p>Name: "+res[0].name+"</p>"+"<p>Words: "+res[0].words+"</p>"
+          + "<p>Name: "+res[0].name+"</p>" + "<p>Titles: "+res[0].titles+" </p>");
+          }, "json");
+      });
+      $('#lannister').click(function(){
+        housewords = "Hear Me Roar!";
+        $.get("http://anapioficeandfire.com/api/houses?words="+housewords, function(res) {
+          $('#houses').html("<p>Name: "+res[0].name+"</p>"+"<p>Words: "+res[0].words+"</p>"
+          + "<p>Name: "+res[0].name+"</p>" + "<p>Titles: "+res[0].titles+" </p>");
+          }, "json");
+      });
+      });
+    </script>
+  </head>
+  <body>
+    <img id="baratheon" src="baratheon.png" />
+    <img id="lannister" src="lannister.jpg" />
+    <img id="stark" src="stark.jpg" />
+    <img id="targ" src="targaryen.jpg" />
+    <div id="houses"></div>
+  </body>
+</html>
