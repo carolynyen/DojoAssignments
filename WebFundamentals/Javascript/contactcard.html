@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Contact Card</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+
+        $('form').submit(function(){
+          var firstname = $('#first').val();
+          var lastname = $('#last').val();
+          var description = $('#descript').val();
+          $('#cardspace').append(
+            "<div id='card' temp='temporary' des="+ description + "><h1>" + firstname + "</h1><h1>" + lastname + "</h1><h2 id='clicked'>Click here for a description!</h2></div>"
+          );
+          return false;
+        });
+        $(document).on("click", "#clicked", function(){
+          var tem = $(this).parent().html();
+          $(this).parent().attr("temp", tem);
+          $(this).parent().html("<p>" + $(this).parent().attr('des') + "</p>");
+          $(document).on("click", "p", function(){
+            var tem = $(this).parent().attr('temp');
+            $(this).parent().html(tem);
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+      <div id=newuser>
+      <h4>New User</h4>
+      <form action="process.php" method='post' id="form">
+        First Name:<input type="text" id='first' name="firstname"><br>
+        Last Name:<input type="text" id="last" name="lastname"><br>
+        Description:<br><input type="field" id="descript" name="descript"><br>
+        <input type=submit value="Add User">
+      </form>
+    </div>
+    <div id=cardspace></div>
+  </body>
+  <style>
+    #newuser{
+      display: inline-block;
+      height: 100%;
+    }
+    #newuser h4{
+      font-size: 14px;
+      width:250px;
+      border-bottom-style: solid;
+      border-bottom-color: gray;
+      border-bottom-width: 2px;
+    }
+    #descript{
+      height: 50px;
+      width: 200px;
+    }
+    #card{
+      height: 160px;
+      width: 300px;
+      padding: 5px;
+      font-size: 20px;
+      border: 2px solid black;
+      display: block;;
+      margin-bottom: 2px;
+    }
+    #card h1{
+      font-size:14px;
+      margin-right: 10px;
+      display: inline-block;
+    }
+    #card h2{
+      font-size: 14px;
+    }
+    #cardspace{
+      vertical-align: top;
+      display: inline-block;
+    }
+    #clicked{
+      color: blue;
+    }
+  </style>
+</html>
