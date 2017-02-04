@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pacman game</title>
+  <style media="screen">
+
+  body{
+    background-color: black;
+    margin: 0px;
+    line-height: 0px;
+  }
+  div.row div{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+  }
+  div.brick{
+    background-color: blue;
+    display: inline-block;
+  }
+  div.coin{
+    background: url("coin.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  div.chicon{
+    background: url("cherry_bonus.png");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  div.empty{
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  div#pacman{
+    background: url("pacman2.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    transform: rotate(0deg);
+  }
+  div#score{
+    border: 1px solid white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    padding: 7px;
+    text-align: center;
+  }
+  div.hiddencherry{
+    background: url("cherry_bonus.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+  }
+
+  /*div#lpac {
+    background: url("pacman2.gif");
+    background-repeat: no-repeat;
+    background-position: center;*/
+    /*transform: rotate(180deg) ;
+    -webkit-transform: rotate(180deg) ;
+    -moz-transform: rotate(180deg) ;
+    -o-transform: rotate(180deg) ;
+    -ms-transform: rotate(180deg) ;*/
+  }
+  .rotateleft{
+    transform: rotate(0deg);
+  }
+  </style>
+
+
+</head>
+<body>
+  <div class=container>
+    <div id="world"></div>
+    <div id="pacman" style="top: 10px; left: 10px;"></div>
+    <div id="chicon"></div>
+
+
+    <div id="score">0</div>
+  </div>
+
+
+
+  <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  // have javascript display of brick/ coin ***done
+  //have pacman move up and down
+  //not going through the wall
+  // coin dissapear after eating
+
+
+  var world = [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,1],
+    [1,1,1,2,2,2,2,1,1,1,2,2,2,2,1,2,2,2,1],
+    [1,2,2,2,2,2,2,2,1,2,1,2,2,2,1,2,2,2,1],
+    [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+    [1,2,2,2,2,2,2,1,1,1,2,2,2,1,2,1,2,2,1],
+    [1,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1,2,1,1],
+    [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+    [1,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,1],
+    [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+    [1,2,2,2,2,2,2,1,1,1,2,2,2,1,1,2,2,2,1],
+    [1,2,1,2,2,2,2,2,2,1,2,2,2,1,2,2,2,2,1],
+    [1,2,1,2,2,2,2,2,2,1,1,1,2,1,2,1,1,2,1],
+    [1,2,1,1,1,2,2,2,2,2,2,2,2,2,2,1,1,2,1],
+    [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  ];
+  var score = 0;
+  var pacman={
+    x:1,
+    y:1
+  };
+
+
+  // function rotatePM(event:KeyboardEvent):void {
+  //   if(event.keyCode == Keyboard.RIGHT){
+  //     pacman.rotation += 90;
+  //   } else if(event.keyCode == Keyboard.LEFT){
+  //     pacman.rotation -= 90;
+  //   }
+  // };
+  //
+  //
+  // stage.addEventListener(KeyboardEvent.KEY_UP, rotatePM);
+
+  function displayWorld() {
+    var output = '';
+    for(var i=0; i<world.length; i++){
+      output +="\n<div class='row'>\n";
+      for (var j=0; j<world[i].length; j++){
+        if(world[i][j] ==1){
+        output += "<div class='brick'></div>";
+        };
+        if (world[i][j] ==2){
+          // if ((Math.floor(Math.random()*100)+1) <= 1){
+          //   output += "<div class='chicon'></div>";
+          // }
+          // else{
+          output += "<div class='coin'></div>";
+          // };
+        };
+      if(world[i][j] ==0){
+        output += "<div class='empty'></div>";
+      };
+      if(world[i][j] ==3){
+        output += "<div class='hiddencherry'></div>";
+      };
+     };
+      output +="\n</div>";
+    }
+    // console.log(output);
+    document.getElementById('world').innerHTML = output;
+  };
+  function displayPacman() {
+    document.getElementById('pacman').style.left = pacman.x*20+"px";
+    document.getElementById('pacman').style.top = pacman.y*20+"px";
+  }
+  function displayScore() {
+    document.getElementById('score').innerHTML= score;
+
+  }
+  displayWorld();
+  displayPacman();
+  displayScore();
+
+
+  document.onkeydown = function(e){
+    console.log(pacman,world[pacman.y][pacman.x]);
+    if((Math.floor(Math.random()*100)+1) <= 90){
+        console.log('cherry');
+        $('hiddencherry').css("background", "none;");
+    }
+    if(e.keyCode == 37 && world[pacman.y][pacman.x-1] != 1 ){
+      // $('#pacman').css('background', "url()");
+      $('#pacman').css('transform', "rotate(180deg)");
+      // $('#pacman').addClass('rotateleft');
+      // left
+          pacman.x --;
+    }
+    else if (e.keyCode ==39 && world[pacman.y][pacman.x+1] != 1) {
+      $('#pacman').css('transform', "rotate(0deg)");
+      pacman.x ++; //right
+    }
+    else if (e.keyCode ==38 && world[pacman.y-1][pacman.x]!= 1) {
+      $('#pacman').css('transform', "rotate(-90deg)");
+      pacman.y --; //up
+    }
+    else if (e.keyCode ==40 && world[pacman.y+1][pacman.x] != 1) {
+    $('#pacman').css('transform', "rotate(90deg)");
+      pacman.y ++; //down
+    }
+    if(world[pacman.y][pacman.x] == 2){
+      world[pacman.y][pacman.x] = 0;
+      score+=10;}
+    if(world[pacman.y][pacman.x] == 3){
+      world[pacman.y][pacman.x] = 0;
+      score+=50;}
+
+      displayWorld();
+      displayScore();
+    // console.log(e.keyCode);
+    displayPacman();
+  }
+
+});
+  </script>
+</body>
+</html>
