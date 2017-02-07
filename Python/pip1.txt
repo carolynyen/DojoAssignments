@@ -1,0 +1,8 @@
+1. installs package Django
+2. lists available packages 
+3. installs Django if not already installed
+4. freeze seems to name version number after == sign
+5. creates a requirements.txt in Desktop that lists the packages again
+6. Uninstalls Django
+7. If uninstalled, nothing happens
+8. Shows all files in the Flask package
