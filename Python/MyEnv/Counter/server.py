@@ -10,6 +10,9 @@ def index():
       session['counter']+=1
   return render_template("index.html")
 
-
+@app.route('/hit', methods=['POST'])
+def hit():
+    session['counter'] += 1
+    return redirect('/')
 
 app.run(debug=True)
