@@ -1,0 +1,203 @@
+<html>
+<head>
+	<title>Javascript Box - OOP demo</title>
+</head>
+
+<style type="text/css">
+	#svg {
+		background-color: black;
+	}
+</style>
+
+<body>
+	<!-- Create the svg with id svg to be referred to in playground -->
+	<svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg>
+	<!-- Begin js -->
+	<script>
+	// library with helper functions
+	var lib = (function(){
+		var rgb = ['f', 'e', 'd', 'c', 'b', 'a', '9', '8', '7', '6', '5', '4', '3', '2', '1', '0'];
+		return {
+			// random number function
+			randomNumberBetween: function(min, max) {
+				return Math.random()*(max-min) + min;
+			},
+			// random color function
+			randomColor: function() {
+				color = '#'
+    			for(var i = 0; i < 6; i++) {
+					x = Math.floor((Math.random()*16))
+					color += rgb[x];
+				}
+				return color;
+			},
+			// function to make the svg
+			makeSVG: function(tag, attrs) {
+  				var el= document.createElementNS('http://www.w3.org/2000/svg', tag);
+		        for (var k in attrs)
+		        {
+		            el.setAttribute(k, attrs[k]);
+		        }
+		        return el;
+			},
+			// detects collision between circles
+			detectCollision: function(circle1, circle2) {
+				// check if there are circles to work with
+				if(circle1 === undefined || circle2 === undefined) {
+					return false
+				}
+				// using pythagorean theorem and slope compare the distance between the two center points to the combination of their radii. If the distance = the sum of radii there is a collision.
+				a = (+circle1.info.cx) - (+circle2.info.cx)
+				b = (+circle1.info.cy) - (+circle2.info.cy)
+				c = (+circle1.info.radius) + (+circle2.info.radius)
+				if(Math.sqrt(Math.pow((+a), 2) + Math.pow((+b), 2)) <= c) {
+					return true
+				}
+				// return false if there is no collision
+				return false
+			},
+			// gets time to help calculate time that the mouse is held
+			getTime: function() {
+				var date = new Date();
+				return date.getTime();
+			}
+		}
+	}());
+	// Circle constructor
+	function Circle(cx, cy, radius, html_id) {
+		this.info = { cx: cx,  cy: cy, radius: radius, html_id: html_id };
+		// initializer function
+		this.initialize = function() {
+			// give a random velocity for the circle
+			// velocity is an object in the this.info attribute with x and y keys
+			this.info.velocity = {
+				x: lib.randomNumberBetween(-3,3),
+				y: lib.randomNumberBetween(-3,3)
+			}
+			//create a circle
+			var circle = lib.makeSVG('circle',
+				{ 	cx: this.info.cx,
+				  	cy: this.info.cy,
+				  	r:  this.info.radius,
+				  	id: this.info.html_id,
+				  	style: "fill: "+lib.randomColor()
+				});
+			// append circle
+			document.getElementById('svg').appendChild(circle);
+		}
+		// updater function to be run repeatedly
+		this.update = function(time) {
+			var el = document.getElementById(this.info.html_id);
+			var offsetx = this.info.radius
+			var offsety = this.info.radius
+			//see if the circle is going outside the browser. if it is, reverse the velocity
+			if(this.info.cx+(+offsetx) > document.body.clientWidth || this.info.cx-(+offsetx) < 0) {
+				this.info.velocity.x = this.info.velocity.x * -1;
+			}
+			if( this.info.cy+(+offsety) > document.body.clientHeight || this.info.cy-(+offsety) < 0) {
+				this.info.velocity.y = this.info.velocity.y * -1;
+			}
+			this.info.cx = this.info.cx + this.info.velocity.x*time;
+			this.info.cy = this.info.cy + this.info.velocity.y*time;
+			el.setAttribute("cx", this.info.cx);
+			el.setAttribute("cy", this.info.cy);
+		}
+		// deletes the svg object associated with 'this'
+		this.deleteself = function() {
+			var el = document.getElementById(this.info.html_id)
+			el.remove()
+		}
+		this.getEl = function() {
+			return document.getElementById(this.info.html_id)
+		}
+		// returns id or undefined if object doesn't exist
+		this.getId = function() {
+			if(this != undefined) {
+				return this.info.html_id
+			}
+			return;
+		}
+	    this.initialize();
+	}
+	// Playground constructor to house the circles
+	function PlayGround() {
+		var counter = 0;  //counts the number of circles created
+		var circles = [ ]; //array that will hold all the circles created in the app
+		//a loop that updates the circle's position on the screen
+		this.loop = function(){
+			for(circle in circles) {
+				circles[circle].update(1);
+				// loop through all circles to detect collisions
+				for(circle2 in circles) {
+					// don't collide with self
+					if(circles[circle].info.html_id != circles[circle2].info.html_id) {
+						// detect for collision
+						if(lib.detectCollision(circles[circle], circles[circle2])) {
+							// bigger one eats smaller one
+							if(circles[circle].info.radius >= circles[circle2].info.radius) {
+								circles[circle].info.radius += Math.log(circles[circle2].info.radius)
+								// update the radius attribute for the element
+								circles[circle].getEl().setAttribute("r", circles[circle].info.radius)
+								// remove the smaller one and delete from array
+								circles[circle2].deleteself()
+								delete circles[circle2]
+							} else {
+								circles[circle2].info.radius += Math.log(circles[circle].info.radius)
+								// update the radius attribute for the element
+								circles[circle2].getEl().setAttribute("r", circles[circle2].info.radius)
+								// remove the smaller one and delete from array
+								circles[circle].deleteself()
+								delete circles[circle]
+							}
+							break; // break out of the inner loop if there is a collision
+						} // if statement for collision detection
+					} // if statement to check if colliding with self
+				} // for loop to detect for collision with every circle on outside loop's circle
+			} // for loop to go through each circle and update
+			// keep updating the width and height of the svg backdrop according to the window size
+			document.getElementById('svg').setAttribute('width', document.body.clientWidth)
+			document.getElementById('svg').setAttribute('height', document.body.clientHeight)
+		}
+		// function to add a circle to the playground
+		this.createNewCircle = function(x,y,radius) {
+			var new_circle = new Circle(x,y,radius,counter++);
+			circles.push(new_circle);
+		}
+		//create one circle when the game starts
+		this.createNewCircle(document.body.clientWidth/2, document.body.clientHeight/2, 10);
+	}
+	// initialize playground and start the game loop
+	var playground = new PlayGround();
+	setInterval(playground.loop, 15);
+	// starts the timer on mousedown
+	document.onmousedown = function(e) {
+		mousedown_time = lib.getTime();
+	}
+	// finishes timer and creates circle on mouseup
+	document.onmouseup = function(e) {
+		time_pressed = lib.getTime() - mousedown_time;
+		// radius is the time pressed in centiseconds
+		r_desired = time_pressed/10
+		// max radius is 200
+		r_desired <= 200 ? r_actual = r_desired : r_actual = 200
+		// check if circle is gonna be outside the x limits
+		if(e.x+r_desired > document.body.clientWidth) {
+			r_actual = document.body.clientWidth - e.x
+		} else if(e.x-r_desired < 0) {
+			r_actual = e.x
+		}
+		// reset r_desired to guard against case when the circle will be outside both the x and y limits
+		r_desired = r_actual
+		// check if circle is gonna be outside the y limits
+		if(e.y+r_desired > document.body.clientHeight) {
+			r_actual = document.body.clientHeight - e.y
+		} else if(e.y-r_desired < 0) {
+			r_actual = e.y
+		}
+		// create the circle with the adjusted actual radius derived from the desired initial radius
+		playground.createNewCircle(e.x,e.y,r_actual)
+	}
+	</script>
+
+</body>
+</html>
