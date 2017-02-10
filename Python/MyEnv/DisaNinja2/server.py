@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect
 app = Flask(__name__)
 app.secret_key= 'heythere'
 
@@ -8,22 +8,22 @@ def profile():
 
 @app.route('/ninja/')
 def ninja():
-    session['color'] = 'Images/tmnt.png'
-    return render_template("index2.html")
+    username = 'Images/tmnt.png'
+    return render_template("index2.html", username=username)
 
 @app.route('/ninja/<username>')
 def show_ninja(username):
     if username == 'blue':
-        session['color'] = 'Images/leonardo.jpg'
+        username = 'Images/leonardo.jpg'
     elif username == 'orange':
-        session['color'] = 'Images/michelangelo.jpg'
+        username = 'Images/michelangelo.jpg'
     elif username == 'red':
-        session['color'] = 'Images/raphael.jpg'
+        username = 'Images/raphael.jpg'
     elif username == 'purple':
-        session['color'] = 'Images/donatello.jpg'
+        username = 'Images/donatello.jpg'
     else:
-        session['color'] = 'Images/notapril.jpg'
-    return render_template("index2.html")
+        username = 'Images/notapril.jpg'
+    return render_template("index2.html", username=username)
 
 
 app.run(debug=True)
