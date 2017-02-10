@@ -1,0 +1,23 @@
+<html>
+  <head>
+     <title>Ninjas</title>
+  </head>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if ("{{ username }}" == "blue"){
+           $("#pictures").append('<img src="{{ url_for('static', filename='Images/leonardo.jpg') }}">');
+        }
+    });
+  </script>
+  <body>
+    <div id="pictures"></div>
+  </body>
+ <style>
+ #pictures img{
+     height: 200px;
+     width:200px;
+ }
+ </style>
+
+</html>
