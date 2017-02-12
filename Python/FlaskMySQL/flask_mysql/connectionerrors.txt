@@ -1,0 +1,15 @@
+mysql.connector.errors.ProgrammingError: 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+
+fix: Make sure you supplied the correct password value to self.config.password
+
+mysql.connector.errors.OperationalError: (_mysql_exceptions.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' (61)") (using port:888)
+
+fix: Make sure you supplied the port for your SQL
+
+OperationalError: (_mysql_exceptions.OperationalError) (1045, "Access denied for user 'r'@'localhost' (using password: YES)”)
+
+fix: Make sure your user is correct, “root”
+
+OperationalError: (_mysql_exceptions.OperationalError) (1049, "Unknown database 'myd'")
+
+fix: Make sure your database is correctly named

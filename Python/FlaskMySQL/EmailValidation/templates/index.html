@@ -1,0 +1,33 @@
+<html>
+<head>
+  <title>Email Validation</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+   {% endwith %}
+   {{ emails }}
+   {% for emails in emails: %}
+   <p>ID: {{ emails['id'] }}</p>
+   <p>Email: {{ emails['email'] }}</p>
+   <p>Created At: {{ emails['created_at'] }}</p>
+   <hr>
+   {% endfor %}
+  <hr>
+  <h2>Add an email</h2>
+  <form action='/emails' method='POST'>
+    <label for="email">Email:<input type="text" name="email" id="email"></label>
+    <input type="submit" value="Add">
+  </form>
+  <form action='/remove_email/<email_id>' method='POST'>
+    <label for="delete">Delete this ID:<input type="text" name="delete"></label>
+    <input type="submit" value="Delete">
+  </form>
+</body>
+</html>
