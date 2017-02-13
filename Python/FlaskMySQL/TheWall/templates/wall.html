@@ -1,0 +1,102 @@
+<html>
+<head>
+  <title>The Wall</title>
+</head>
+<body>
+   <div class="header">
+       <h2>Coding Dojo Wall</h2>
+       <p>Hi {{users['first_name']}}!</p>
+       <form action='/logout' method='POST'>
+          <input type="submit" value="Log Off">
+       </form>
+   </div>
+   {% with messages = get_flashed_messages(with_categories=true) %}
+   {% if messages %}
+     <ul class=flashes>
+     {% for category, message in messages %}
+       <li class="{{ category }}">{{ message }}</li>
+     {% endfor %}
+     </ul>
+   {% endif %}
+   {% endwith %}
+   <div class="messagebox">
+       <form action="/messages/{{users['id']}}" method='POST'>
+           <label for="message">Post a Message:<input type="field" name="message" class="message"></label>
+           <input type="submit" value="post a message">
+       </form>
+   </div>
+   <div class="body">
+       <h3>Messages on The Wall:</h3><br>
+       {% for message in messages: %}<br>
+       <p>By: {{ message['name'] }}</p><br>
+       <p>Posted {{ message['created_at'] }}</p><br>
+       <p>{{ message['content'] }}</p><br>
+       {% if message['messager_id'] == session['userid'] %}
+       <form action="/messages/{{message['message_id']}}/delete" method='POST'>
+            <input type="submit" value="delete this message">
+       </form><br>
+       {% endif %}
+       <div class="commentbody">
+             {% for comment in comments: %}
+               {% if comment['message_id'] == message['message_id'] %}
+                 <br>
+                 <p>By: {{ comment['commenter_name'] }}</p><br>
+                 <p>Posted {{ comment['created_at'] }}</p><br>
+                 <p>{{ comment['content'] }}</p>
+                 <br>
+                 {% if comment['commenter_id'] == session['userid'] %}
+                 <form action="/comments/{{comment['comment_id']}}/delete" method='POST'>
+                      <input type="submit" value="delete this comment">
+                 </form><br>
+                 {% endif %}
+               {% endif %}
+             {% endfor %}
+       </div>
+       <form action="/comments/{{message['message_id']}}" method='POST'>
+            <label for="message">Post a Comment:<input type="field" name="comment" class="comment"></label>
+            <input type="submit" value="post a comment">
+       </form><br>
+       {% endfor %}<br>
+   </div>
+</body>
+<style>
+.header h2, p, form {
+    display: inline-block;
+}
+.header p{
+    margin-left: 200px;
+}
+.message{
+    display: inline-block;
+    vertical-align: top;
+    height:100px;
+    width: 200px;
+}
+.comment{
+    display: inline-block;
+    vertical-align: top;
+    height:50px;
+    width: 200px;
+}
+.messagebox input{
+    display: inline-block;
+    vertical-align: top;
+}
+.body input, p{
+    display: inline-block;
+    padding: 0px;
+    margin:0px;
+}
+.body form{
+    margin-top: 12px;
+}
+.body{
+    display: block;
+    line-height: normal;
+    letter-spacing: normal;
+}
+.commentbody{
+    margin-left: 20px;
+}
+</style>
+</html>
