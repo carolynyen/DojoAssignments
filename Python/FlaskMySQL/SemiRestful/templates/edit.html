@@ -1,0 +1,18 @@
+<html>
+<head>
+  <title>Semi Restful Users</title>
+</head>
+<body>
+   {{ friends }}
+  <h2>Edit User {{friends['id']}} with this form:</h2>
+  <form action="/users/{{friends['id']}}" method='POST'>
+    <label for="first_name">First Name:<input type="text" placeholder="{{friends['first_name']}}" name="first_name"></label>
+    <label for="last_name">Last Name:<input type="text" placeholder="{{friends['last_name']}}" name="last_name"></label>
+    <label for="email">Email:<input type="text" placeholder="{{friends['email']}}" name="email"></label>
+    <input type="submit" value="Edit">
+  </form>
+  <form action="/back" method='POST'>
+    <input type="submit" value="Back to Index" name="back">
+  </form>
+</body>
+</html>

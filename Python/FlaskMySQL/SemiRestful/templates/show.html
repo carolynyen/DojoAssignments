@@ -1,0 +1,24 @@
+<html>
+<head>
+  <title>Semi Restful Users</title>
+</head>
+<body>
+   {{ friends }}
+   <h2>User {{ friends['id'] }}:</h2>
+   <p>ID: {{ friends['id'] }}</p>
+   <p>First Name: {{ friends['first_name'] }}</p>
+   <p>Last Name: {{ friends['last_name'] }}</p>
+   <p>Email: {{ friends['email'] }}</p>
+   <p>Created At: {{ friends['created_at'] }}</p>
+   <hr>
+   <form action="/users/{{friends['id']}}/edit" method='POST'>
+     <input type="submit" value="Edit" name="edit">
+   </form>
+   <form action="/users/{{friends['id']}}/destroy" method='POST'>
+     <input type="submit" value="Delete" name="delete">
+   </form>
+   <form action="/back" method='POST'>
+     <input type="submit" value="Back to Index" name="back">
+   </form>
+</body>
+</html>

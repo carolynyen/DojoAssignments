@@ -3,7 +3,6 @@ from mysqlconnection import MySQLConnector
 from flask_bcrypt import Bcrypt
 import re, time
 from time import strftime
-from datetime import datetime, timedelta, date
 
 app = Flask(__name__)
 app.secret_key= "Heythere11"
