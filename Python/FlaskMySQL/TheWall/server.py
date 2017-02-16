@@ -19,6 +19,9 @@ def index():
 
 @app.route('/success')
 def success():
+    if 'userid' not in session:
+        flash('You have not logged in properly')
+        return redirect('/')
     query = "SELECT * FROM users WHERE id = :specific_id;"
     data = {'specific_id': session['userid']}
     users = mysql.query_db(query, data)
@@ -143,6 +146,9 @@ def store_comment(id):
 
 @app.route('/wall')
 def wall():
+    if 'userid' not in session:
+        flash('You have not logged in yet')
+        return redirect('/')
     query = "SELECT * FROM users WHERE id = :specific_id;"
     data = {'specific_id': session['userid']}
     users = mysql.query_db(query, data)
