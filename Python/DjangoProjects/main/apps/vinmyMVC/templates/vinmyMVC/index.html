@@ -6,6 +6,7 @@
         {% load staticfiles %}
       <!-- The line above tells Django to be ready to listen for static files -->
       <link rel="stylesheet" href="{% static 'vinmyMVC/css/main.css' %}"media="screen" title="vinmyMVC"  charset="utf-8">
+      <script src="{% static 'vinmyMVC/js/main.js' %}" > </script>
     </head>
     <body>
         <p>Hi {{request.session.name}}</p>
