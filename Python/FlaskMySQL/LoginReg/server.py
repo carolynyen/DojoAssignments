@@ -18,6 +18,8 @@ def index():
 
 @app.route('/success')
 def success():
+    if 'userid' not in session:
+        return redirect('/')
     query = "SELECT * FROM users WHERE id = :specific_id;"
     data = {'specific_id': session['userid']}
     users = mysql.query_db(query, data)
@@ -25,9 +27,15 @@ def success():
 
 @app.route('/users', methods=['POST'])
 def create_user():
+    email = request.form['email']
+    alreadyreg_query = "SELECT * FROM users WHERE email = :email;"
+    alreadyreg_query_data = { 'email': email }
+    trying_to_reg = mysql.query_db(alreadyreg_query, alreadyreg_query_data)
+    if len(trying_to_reg) > 0:
+        flash('Already registered!')
+        return redirect('/')
     first_name= request.form['first_name']
     last_name= request.form['last_name']
-    email = request.form['email']
     password = request.form['password']
     status = True
     if not re.search(r'^[a-zA-Z]+$', last_name):
