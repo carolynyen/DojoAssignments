@@ -1,26 +1,19 @@
+import math
 def change(cents):
-    coins = {}
-    dollars = 0
-    quarters = 0
-    dimes = 0
-    nickels = 0
-    while cents >= 100:
-        dollars += 1
-        cents -= 100
-    while cents >= 25:
-        quarters += 1
-        cents -= 25
-    while cents >= 10:
-        dimes += 1
-        cents -= 10
-    while cents >= 5:
-        nickels += 1
-        cents -= 5
-    coins["dollars"] = dollars
-    coins["quarters"] = quarters
-    coins["dimes"] = dimes
-    coins["nickels"] = nickels
-    coins["pennies"] = cents
+    coins = {'dollars':'0', 'quarters': '0', 'dimes': '0', 'nickels': '0', 'pennies': '0'}
+    if cents >= 100:
+        coins['dollars'] = int(math.floor(cents/100))
+        cents = cents % 100
+    if cents >= 25:
+        coins['quarters'] = int(math.floor(cents/25))
+        cents = cents % 25
+    if cents >= 10:
+        coins['dimes'] = int(math.floor(cents/10))
+        cents = cents % 10
+    if cents >= 5:
+        coins['nickels'] = int(math.floor(cents/5))
+        cents = cents % 5
+    coins['pennies'] = cents
     return coins
 
-print change(387)
+print change(459)
