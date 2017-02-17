@@ -9,11 +9,11 @@
         {% for course in courses %}
         Course Name: {{course.name}}
         Course Description: {{course.description}}
-        <form action='/dontdelete' method='POST'>
+        <form action='/' method='POST'>
             {% csrf_token %}
             <input type="submit" value="No">
         </form>
-        <form action='/dodelete/{{course.name}}' method='POST'>
+        <form action='/dodelete/{{course.id}}' method='POST'>
             {% csrf_token %}
             <input type="submit" value="Yes">
         </form>

@@ -14,13 +14,10 @@
         </form>
         <h2>Courses</h2>
         {% for course in courses %}
-        Course Name: {{course.name}}
-        Course Description: {{course.description}}
-        Date Added: {{course.created_at}}
-        <form action='/delete/{{course.name}}' method='POST'>
-            {% csrf_token %}
-            <label for="delete">Actions:<input type="submit" value="remove" name="delete"></label>
-        </form>
+        Course Name: {{course.name}}<br>
+        Course Description: {{course.description}}<br>
+        Date Added: {{course.created_at}}<br>
+        Actions:<a href='/delete/{{course.id}}' name='delete'>remove</a><br><br>
         {% endfor %}
     </body>
 </html>

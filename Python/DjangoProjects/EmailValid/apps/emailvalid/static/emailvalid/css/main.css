@@ -1,0 +1,13 @@
+ .submit {
+    background-color: blue;
+    color: white;
+}
+.error {
+    color: black;
+    background-color: red;
+}
+
+.success {
+    color: white;
+    background-color: green;
+}
