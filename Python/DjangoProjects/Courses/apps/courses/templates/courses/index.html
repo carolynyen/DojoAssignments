@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Courses</title>
+    </head>
+    <body>
+        <h2> Add a new course</h2>
+        <form action='/process' method='POST'>
+            {% csrf_token %}
+            Name: <input type="text" name="name">
+            Description: <input type="text" name="description">
+            <input type="submit" value="Add" name="add">
+        </form>
+        <h2>Courses</h2>
+        {% for course in courses %}
+        Course Name: {{course.name}}
+        Course Description: {{course.description}}
+        Date Added: {{course.created_at}}
+        <form action='/delete/{{course.name}}' method='POST'>
+            {% csrf_token %}
+            <label for="delete">Actions:<input type="submit" value="remove" name="delete"></label>
+        </form>
+        {% endfor %}
+    </body>
+</html>
