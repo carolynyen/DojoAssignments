@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login and Reg | Success</title>
+    </head>
+    <body>
+        <a href="/logout" method='POST' class="logout">Log Out</a>
+        {% if request.session.success == 'registered' %}
+        <p class="success">Success in registration! Welcome {{user}}!</p>
+        <h2>Users Entered</h2><br>
+        {% for one in user %}
+            First Name: {{one.first_name}} <br>
+            Last Name: {{one.last_name}} <br>
+            Email: {{one.email}} <br>
+            Entered at: {{one.created_at}} <br>
+            <a href="/delete/{{one.id}}" method='POST'>Remove</a>
+            <br>
+            <br>
+        {% endfor %}
+        {% endif %}
+        {% if request.session.success == 'loggedin' %}
+        <p class="success">Success in logging in! Welcome {{user}}!</p>
+        <h2>Users Entered</h2><br>
+        {% for one in user %}
+            First Name: {{one.first_name}} <br>
+            Last Name: {{one.last_name}} <br>
+            Email: {{one.email}} <br>
+            Entered at: {{one.created_at}} <br>
+            <a href="/delete/{{one.id}}" method='POST'>Remove</a>
+            <br>
+            <br>
+        {% endfor %}
+        {% endif %}
+    </body>
+</html>
