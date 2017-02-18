@@ -26,7 +26,7 @@ def index3(request):
     return render(request, "leagues/index.html", context)
 
 def index4(request):
-    user = League.objects.exclude(sport= "Football")
+    user = League.objects.exclude(sport="Football")
     context = {"leagues": user, "teams": Team.objects.all(), "players": Player.objects.all(),}
     return render(request, "leagues/index.html", context)
 
