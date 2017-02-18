@@ -11,3 +11,11 @@
     color: white;
     background-color: green;
 }
+
+.delete {
+    color: blue;
+    background-color: white;
+    border-style: none;
+    font-size: 14px;
+    margin-left: -5px;
+}

@@ -7,14 +7,21 @@
         <link rel="stylesheet" type="text/css" href={%static "emailvalid/css/main.css"%}>
     </head>
     <body>
-        <p class="success">{{success}}</p>
+        <p class="success">{{request.session.success}}</p>
         <h2>Email Addresses Entered</h2>
         {% for email in emails %}
         Email: {{email.email}} <br>
         Entered at: {{email.created_at}}
-        <a href="/delete/{{email.id}}" method='POST'>Remove</a>
+        <form action="/delete/{{email.id}}" method='POST'>
+            {% csrf_token %}
+          <input type="submit" value="remove" class="delete">
+        </form>
         <br>
         <br>
         {% endfor %}
+        <form action="/back" method='POST'>
+            {% csrf_token %}
+          <input type="submit" value="Go back to index" class="back">
+        </form>
     </body>
 </html>
