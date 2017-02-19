@@ -3,7 +3,7 @@ import re
 from django.db import models
 import bcrypt
 Email_Regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-
+Name_Regex = re.compile(r'^[A-Za-z]+$')
 
 # Create your models here.
 
@@ -21,8 +21,14 @@ class UserManager(models.Manager):
         if len(postFirstName) < 2:
             errorlist.append('First name must be more than 2 characters.')
             status = False
+        if not Name_Regex.match(postFirstName):
+            errorlist.append('First name must be letters only.')
+            status = False
         if len(postLastName) < 2:
             errorlist.append('First name must be more than 2 characters.')
+            status = False
+        if not Name_Regex.match(postLastName):
+            errorlist.append('Last name must be letters only.')
             status = False
         if len(postPassword) < 1:
             errorlist.append('Must fill in a password.')
