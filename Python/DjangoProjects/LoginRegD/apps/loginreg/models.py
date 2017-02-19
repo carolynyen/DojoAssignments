@@ -10,28 +10,62 @@ Email_Regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 class UserManager(models.Manager):
 
     def register(self, postFirstName, postLastName, postEmail, postPassword, postConfirm):
+        status = True
+        errorlist = []
         if postPassword != postConfirm:
-            return {'errors':'Confirm Password does not match Password!'}
+            errorlist.append('Confirm Password does not match Password!')
+            status = False
         if len(postEmail) < 1:
-            return {'errors':'Must fill in Email!'}
+            errorlist.append('Must fill in Email!')
+            status = False
+        if len(postFirstName) < 2:
+            errorlist.append('First name must be more than 2 characters.')
+            status = False
+        if len(postLastName) < 2:
+            errorlist.append('First name must be more than 2 characters.')
+            status = False
+        if len(postPassword) < 1:
+            errorlist.append('Must fill in a password.')
+            status = False
+        if len(postPassword) > 8:
+            errorlist.append('Password must be less than 8 characters.')
+            status = False
         if not Email_Regex.match(postEmail):
-            return {'errors':'Email not valid!'}
+            errorlist.append('Email not valid! Needs to be <name>@<host>.com format.')
+            status = False
         if len(User.userManager.filter(email = postEmail)) > 0:
-            return {'errors': 'Email already registered!'}
-        password = postPassword
-        hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-        return {'register': True, 'first_name': postFirstName, 'last_name': postLastName, 'email': postEmail,'password': hashed}
+            errorlist.append('Email already registered!')
+            status = False
+        if status == False:
+            return {'errors': errorlist}
+        else:
+            password = postPassword
+            hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+            return {'register': True, 'first_name': postFirstName, 'last_name': postLastName, 'email': postEmail,'password': hashed}
 
     def login(self, postEmail, postPassword):
+        status = True
+        errorlist = []
         user = User.userManager.filter(email = postEmail)
-        if len(user) == 1:
-            if bcrypt.check_password_hash(user[0]['password'], postpassword):
+        if len(postEmail) < 1:
+            errorlist.append('Must fill in Email!')
+            status = False
+        if len(postPassword) < 1:
+            errorlist.append('Must fill in Password!')
+            status = False
+        else:
+            if len(user) < 1:
+                errorlist.append('Email not registered!')
+                status = False
+        if status == False:
+            return {'errors': errorlist}
+        else:
+            if bcrypt.hashpw(postPassword.encode(), user[0].password.encode()) == user[0].password:
                 return {'login': True}
             else:
-                return {'errors':'Password does not match email!'}
-        else:
-            return {'errors':'Email not registered!'}
-
+                status = False
+                errorlist.append('Password does not match email!')
+                return {'errors': errorlist}
 
 class User(models.Model):
       first_name = models.CharField(max_length=100)
