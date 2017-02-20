@@ -1,0 +1,69 @@
+* {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.delete {
+  background-color: red;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+form {
+  display: inline;
+}
+
+.add {
+    color: white;
+    background-color: green;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+.remove {
+    border-style: none;
+    color: blue;
+    text-decoration: underline;
+    font-size:16px;
+    background-color: transparent;
+}
+
+.comment {
+    border-style: none;
+    color: blue;
+    text-decoration: underline;
+    font-size:16px;
+    background-color: transparent;
+}
+
+.nodelete {
+    color: white;
+    background-color: blue;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.coursetable, .deletetable {
+    border-collapse: collapse;
+    border: 1px black solid;
+    margin-bottom: 20px;
+}
+
+.coursetable td, .coursetable th{
+    border-left: 1px black solid;
+    padding: 0 5px 0 5px;
+}
+.coursetable th{
+    background-color: #CCCBCB;
+}
+
+.deletetable td{
+    border-bottom: 1px black solid;
+    padding: 0 5px 0 5px;
+}
+.deletetitle{
+    font-weight: bold;
+    border: 1px black solid;
+}
+.coursetable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
