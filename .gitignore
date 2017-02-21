@@ -1,2 +1,4 @@
 *.pyc
 venv/
+DjangoEnv/
+py2FlaskEnv/
