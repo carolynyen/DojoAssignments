@@ -10,54 +10,54 @@ Name_Regex = re.compile(r'^[A-Za-z]+$')
 
 class UserManager(models.Manager):
 
-    def register(self, postFirstName, postLastName, postEmail, postPassword, postConfirm):
+    def register(self, postData):
         status = True
         errorlist = []
-        if postPassword != postConfirm:
+        if postData['password'] != postData['confirm']:
             errorlist.append('Confirm Password does not match Password!')
             status = False
-        if len(postEmail) < 1:
+        if len(postData['email']) < 1:
             errorlist.append('Must fill in Email!')
             status = False
-        if len(postFirstName) < 2:
+        if len(postData['first_name']) < 2:
             errorlist.append('First name must be more than 2 characters.')
             status = False
-        if not Name_Regex.match(postFirstName):
+        if not Name_Regex.match(postData['first_name']):
             errorlist.append('First name must be letters only.')
             status = False
-        if len(postLastName) < 2:
+        if len(postData['last_name']) < 2:
             errorlist.append('First name must be more than 2 characters.')
             status = False
-        if not Name_Regex.match(postLastName):
+        if not Name_Regex.match(postData['last_name']):
             errorlist.append('Last name must be letters only.')
             status = False
-        if len(postPassword) < 1:
+        if len(postData['password']) < 1:
             errorlist.append('Must fill in a password.')
             status = False
-        if len(postPassword) > 8:
+        if len(postData['password']) > 8:
             errorlist.append('Password must be less than 8 characters.')
             status = False
-        if not Email_Regex.match(postEmail):
+        if not Email_Regex.match(postData['email']):
             errorlist.append('Email not valid! Needs to be <name>@<host>.com format.')
             status = False
-        if len(User.userManager.filter(email = postEmail)) > 0:
+        if len(User.objects.filter(email = postData['email'])) > 0:
             errorlist.append('Email already registered!')
             status = False
         if status == False:
             return {'errors': errorlist}
         else:
-            password = postPassword
+            password = postData['password']
             hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-            return {'register': True, 'first_name': postFirstName, 'last_name': postLastName, 'email': postEmail,'password': hashed}
+            return {'register': True, 'password': hashed}
 
-    def login(self, postEmail, postPassword):
+    def login(self, postData):
         status = True
         errorlist = []
-        user = User.userManager.filter(email = postEmail)
-        if len(postEmail) < 1:
+        user = User.objects.filter(email = postData['email'])
+        if len(postData['email']) < 1:
             errorlist.append('Must fill in Email!')
             status = False
-        if len(postPassword) < 1:
+        if len(postData['password']) < 1:
             errorlist.append('Must fill in Password!')
             status = False
         else:
@@ -67,7 +67,7 @@ class UserManager(models.Manager):
         if status == False:
             return {'errors': errorlist}
         else:
-            if bcrypt.hashpw(postPassword.encode(), user[0].password.encode()) == user[0].password:
+            if bcrypt.hashpw(postData['password'].encode(), user[0].password.encode()) == user[0].password:
                 return {'login': True}
             else:
                 status = False
@@ -81,4 +81,4 @@ class User(models.Model):
       password = models.CharField(max_length=200)
       created_at = models.DateTimeField(auto_now_add = True)
       updated_at = models.DateTimeField(auto_now = True)
-      userManager = UserManager()
+      objects = UserManager()
