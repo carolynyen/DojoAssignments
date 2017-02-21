@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import re
 from django.db import models
+from django.contrib import messages
 import bcrypt
 Email_Regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 Name_Regex = re.compile(r'^[A-Za-z]+$')

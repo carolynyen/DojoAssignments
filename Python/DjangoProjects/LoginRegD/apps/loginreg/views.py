@@ -1,28 +1,20 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import User
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
-    # Making sure that refreshing the page will remove the error message
-    if 'counter' not in request.session:
-        request.session['counter'] = 0
-    request.session['counter'] += 1
-    if request.session['counter'] == 2:
-        if 'error' in request.session:
-            del request.session['error']
     request.session['success'] = False   #  resetting the logged in or registered person
     return render(request, 'loginreg/index.html')
 
 def register(request):
-    request.session['counter'] = 0
-    if 'error' in request.session:
-        del request.session['error']
     if request.method == "GET":
         return redirect('/')
     user = User.userManager.register(request.POST['first_name'], request.POST['last_name'], request.POST['email'], request.POST['password'], request.POST['confirm'])
     if 'errors' in user:
         error = user['errors']
-        request.session['error'] = error
+        for one in error:
+            messages.error(request, one)
         return redirect('/')
     if user['register'] == True:
         User.userManager.create(first_name= user['first_name'], last_name= user['last_name'], email = user['email'], password = user['password'])
@@ -38,15 +30,13 @@ def success(request):
     return render(request, 'loginreg/success.html', context)
 
 def login(request):
-    request.session['counter'] = 0
-    if 'error' in request.session:
-        del request.session['error']
     if request.method == "GET":
         return redirect('/')
     user = User.userManager.login(request.POST['email'], request.POST['password'])
     if 'errors' in user:
         error = user['errors']
-        request.session['error'] = error
+        for one in error:
+            messages.error(request, one)
         return redirect('/')
     if user['login'] == True:
         user = User.userManager.filter(email = request.POST['email'])
