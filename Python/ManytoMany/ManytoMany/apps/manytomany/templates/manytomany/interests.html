@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>A Web Page</title>
+    </head>
+    <body>
+        {% for one in user %}
+            Name:  {{one.name}} <br>
+            {% for tag in one.interests.all %}
+             Interest:  {{ tag.name }}
+             <form action='/interest/{{tag.id}}' method='POST'>
+                 {% csrf_token %}
+                 <input type="submit" value="Find others with same interest!">
+             </form>
+              <br>
+           {% endfor %}
+           <br>
+        {% endfor %}
+        <form action='/' method='POST'>
+            {% csrf_token %}
+            <input type="submit" value="Go back to index">
+        </form>
+        <form action='/viewpeople' method='POST'>
+            {% csrf_token %}
+            <input type="submit" value="Go back to people">
+        </form>
+    </body>
+</html>

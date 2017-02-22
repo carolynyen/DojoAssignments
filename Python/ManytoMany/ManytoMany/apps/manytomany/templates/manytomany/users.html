@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>A Web Page</title>
+    </head>
+    <body>
+        {% for one in user %}
+            First Name:  {{one.name}} <br>
+            <form action='/show/{{one.id}}' method='POST'>
+                {% csrf_token %}
+                <input type="submit" value="show" class="show">
+            </form>
+            <form action='/delete/{{one.id}}' method='POST'>
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+            </form>
+           <br>
+        {% endfor %}
+        <form action='/' method='POST'>
+            {% csrf_token %}
+            <input type="submit" value="Go back to index">
+        </form>
+    </body>
+</html>
