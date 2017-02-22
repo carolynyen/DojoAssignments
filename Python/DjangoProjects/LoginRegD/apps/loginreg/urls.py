@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^success$', views.success),
     url(r'^delete/(?P<id>\d+)$', views.delete),
     url(r'^logout$', views.logout),
+    url(r'^.+$', views.index),
 ]
