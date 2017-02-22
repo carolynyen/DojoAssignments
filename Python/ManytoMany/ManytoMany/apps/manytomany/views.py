@@ -23,13 +23,14 @@ def show(request, id):
 def sameinterest(request, id):
     if request.method == "GET":
         return redirect('/')
-    user = Interest.objects.filter(id = id)
-    request.session['interest_name'] = user[0].name
+    request.session['interest_id'] = id
     return redirect('/sameinterest')
 
 def showme(request):
-    context ={"user": User.objects.filter(interests__name = request.session['interest_name'])}
-    return render(request, 'manytomany/users.html', context)
+    if 'interest_id' not in request.session:
+        return redirect('/')
+    context ={"user": Interest.objects.filter(id = request.session['interest_id'])}
+    return render(request, 'manytomany/sameinterest.html', context)
 
 def viewpeople(request):
     context ={"user": User.objects.all()}

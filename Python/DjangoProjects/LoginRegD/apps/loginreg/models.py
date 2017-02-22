@@ -22,13 +22,13 @@ class UserManager(models.Manager):
         if len(postData['first_name']) < 2:
             errorlist.append('First name must be more than 2 characters.')
             status = False
-        if not Name_Regex.match(postData['first_name']):
+        elif not Name_Regex.match(postData['first_name']):
             errorlist.append('First name must be letters only.')
             status = False
         if len(postData['last_name']) < 2:
             errorlist.append('First name must be more than 2 characters.')
             status = False
-        if not Name_Regex.match(postData['last_name']):
+        elif not Name_Regex.match(postData['last_name']):
             errorlist.append('Last name must be letters only.')
             status = False
         if len(postData['password']) < 1:
