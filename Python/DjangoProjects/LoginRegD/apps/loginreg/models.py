@@ -48,7 +48,8 @@ class UserManager(models.Manager):
         else:
             password = postData['password']
             hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-            return {'register': True, 'password': hashed}
+            User.objects.create(first_name= postData['first_name'], last_name= postData['last_name'], email = postData['email'], password = hashed)
+            return {'register': True}
 
     def login(self, postData):
         status = True

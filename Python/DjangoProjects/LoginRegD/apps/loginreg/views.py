@@ -17,7 +17,6 @@ def register(request):
             messages.error(request, one)
         return redirect('/')
     if user['register'] == True:
-        User.objects.create(first_name= request.POST['first_name'], last_name= request.POST['last_name'], email = request.POST['email'], password = user['password'])
         user = User.objects.filter(email = request.POST['email'])
         request.session['userid'] = user[0].id
         request.session['success'] = 'registered'
