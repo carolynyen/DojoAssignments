@@ -16,29 +16,32 @@ class UserManager(models.Manager):
         if postData['password'] != postData['confirm']:
             errorlist.append('Confirm Password does not match Password!')
             status = False
-        if len(postData['email']) < 1:
-            errorlist.append('Must fill in Email!')
-            status = False
         if len(postData['first_name']) < 2:
-            errorlist.append('First name must be more than 2 characters.')
+            errorlist.append('First name must be more than 2 characters!')
             status = False
         elif not Name_Regex.match(postData['first_name']):
             errorlist.append('First name must be letters only.')
             status = False
         if len(postData['last_name']) < 2:
-            errorlist.append('First name must be more than 2 characters.')
+            errorlist.append('First name must be more than 2 characters!')
             status = False
         elif not Name_Regex.match(postData['last_name']):
             errorlist.append('Last name must be letters only.')
             status = False
         if len(postData['password']) < 1:
-            errorlist.append('Must fill in a password.')
+            errorlist.append('Must fill in a password!')
             status = False
         if len(postData['password']) > 8:
             errorlist.append('Password must be less than 8 characters.')
             status = False
-        if not Email_Regex.match(postData['email']):
+        if len(postData['email']) < 1:
+            errorlist.append('Must fill in Email!')
+            status = False
+        elif not Email_Regex.match(postData['email']):
             errorlist.append('Email not valid! Needs to be <name>@<host>.com format.')
+            status = False
+        if len(postData['confirm']) < 1:
+            errorlist.append('Must fill in a password confirmation!')
             status = False
         if len(User.objects.filter(email = postData['email'])) > 0:
             errorlist.append('Email already registered!')
