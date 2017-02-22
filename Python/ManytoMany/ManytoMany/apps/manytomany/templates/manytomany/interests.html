@@ -7,8 +7,9 @@
     <body>
         {% for one in user %}
             Name:  {{one.name}} <br>
+            Interests:  <br><br>
             {% for tag in one.interests.all %}
-             Interest:  {{ tag.name }}
+              {{ tag.name }}
              <form action='/interest/{{tag.id}}' method='POST'>
                  {% csrf_token %}
                  <input type="submit" value="Find others with same interest!">

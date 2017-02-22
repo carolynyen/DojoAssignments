@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^interest/(?P<id>\d+)$', views.sameinterest),
     url(r'^delete/(?P<id>\d+)$', views.delete),
     url(r'^sameinterest$', views.showme),
+    url(r'^.+$', views.index),
 ]
