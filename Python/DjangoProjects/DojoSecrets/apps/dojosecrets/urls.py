@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^logout$', views.logout),
     url(r'^postsecret$', views.addsecret),
     url(r'^popularsecrets$', views.showpopular),
+    url(r'^like1/(?P<id>\d+)$', views.addlike1),
+    url(r'^like2/(?P<id>\d+)$', views.addlike2),
     url(r'^.+$', views.index),
 ]

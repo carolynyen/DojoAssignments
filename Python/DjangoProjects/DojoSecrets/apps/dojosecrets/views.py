@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import User, Secret
 from django.contrib import messages
+from django.db.models import F
 
 # Create your views here.
 def index(request):
@@ -52,7 +53,6 @@ def delete(request, id):
     User.objects.filter(id=id).delete()
     return redirect('/success')
 
-
 def deletesecret(request, id):
     if request.method == "GET":
         return redirect('/')
@@ -77,8 +77,21 @@ def showpopular(request):
         return redirect('/')
     if 'userid' not in request.session:
         return redirect('/')
-    context = {'user': Secret.objects.all(), 'loggeduser': User.objects.filter(id=request.session['userid'])[0]}
+    user = Secret.objects.all().order_by('-likes')
+    context = {'user': user[:10], 'loggeduser': User.objects.filter(id=request.session['userid'])[0]}
     return render(request, 'dojosecrets/popularsecrets.html', context)
+
+def addlike1(request, id):
+    if request.method == "GET":
+        return redirect('/')
+    secret = Secret.objects.filter(id = id).update(likes=F('likes') + 1)
+    return redirect('/success')
+
+def addlike2(request, id):
+    if request.method == "GET":
+        return redirect('/')
+    secret = Secret.objects.filter(id = id).update(likes=F('likes') + 1)
+    return redirect('/popularsecrets')
 
 def logout(request):
     if request.method == "GET":
