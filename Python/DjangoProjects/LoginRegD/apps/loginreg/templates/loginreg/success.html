@@ -5,7 +5,10 @@
         <title>Login and Reg | Success</title>
     </head>
     <body>
-        <a href="/logout" method='POST' class="logout">Log Out</a>
+        <form action='/logout' method='POST'>
+            {% csrf_token %}
+            <input type="submit" value="Log Out" class="logout">
+        </form>
         {% if request.session.success == 'registered' %}
         <p class="success">Success in registration! Welcome {{loggeduser.first_name}}!</p>
         <h2>Users Entered</h2><br>
