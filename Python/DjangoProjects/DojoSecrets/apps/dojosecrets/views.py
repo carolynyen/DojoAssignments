@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from .models import User, Secret
 from django.contrib import messages
 from django.db.models import F
+from django.db.models import Count
 
 # Create your views here.
 def index(request):
@@ -24,11 +25,11 @@ def register(request):
     return redirect('/success')
 
 def success(request):
-    if request.session['success'] == False:
+    if 'success' not in request.session or request.session['success'] == False:
         return redirect('/')
     if 'userid' not in request.session:
         return redirect('/')
-    user = Secret.objects.all().order_by('-id')
+    user = Secret.objects.annotate(num_likes=Count('likers')).order_by('-id')
     context = {'user': user[:5], 'loggeduser': User.objects.filter(id=request.session['userid'])[0]}
     return render(request, 'dojosecrets/recentsecrets.html', context)
 
@@ -77,26 +78,26 @@ def showpopular(request):
         return redirect('/')
     if 'userid' not in request.session:
         return redirect('/')
-    user = Secret.objects.all().order_by('-likes')
+    user = Secret.objects.annotate(num_likes=Count('likers')).order_by('-num_likes')
     context = {'user': user[:10], 'loggeduser': User.objects.filter(id=request.session['userid'])[0]}
     return render(request, 'dojosecrets/popularsecrets.html', context)
 
 def addlike1(request, secretid, userid):
     if request.method == "GET":
         return redirect('/')
-    this_secret = Secret.objects.filter(id = secretid).update(likes=F('likes') + 1)
-    this_secret = Secret.objects.get(id = secretid)
-    this_user = User.objects.get(id = userid)
-    this_secret.likeduser.add(this_user)
+    secret = Secret.objects.addlike(secretid, userid)
+    if 'errors' in secret:
+        messages.error(request, secret['errors'])
+        return redirect('/success')
     return redirect('/success')
 
 def addlike2(request, secretid, userid):
     if request.method == "GET":
         return redirect('/')
-    this_secret = Secret.objects.filter(id = secretid).update(likes=F('likes') + 1)
-    this_secret = Secret.objects.get(id = secretid)
-    this_user = User.objects.get(id = userid)
-    this_secret.likeduser.add(this_user)
+    secret = Secret.objects.addlike(secretid, userid)
+    if 'errors' in secret:
+        messages.error(request, secret['errors'])
+        return redirect('/popularsecrets')
     return redirect('/popularsecrets')
 
 def logout(request):

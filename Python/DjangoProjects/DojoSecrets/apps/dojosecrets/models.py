@@ -99,12 +99,19 @@ class SecretManager(models.Manager):
             return {'errors': errorlist}
         else:
             return {}
+    def addlike(self, secretid, userid):
+        if len(Secret.objects.filter(id = secretid).filter(likers__id = userid)) > 0:
+            return {'errors': 'You already liked this!!'}
+        else:
+            this_secret = Secret.objects.get(id = secretid)
+            this_user = User.objects.get(id = userid)
+            this_secret.likers.add(this_user)
+            return {}
 
 class Secret(models.Model):
       content = models.CharField(max_length=1000)
       creator = models.ForeignKey(User, related_name="users")
-      likes = models.IntegerField(default=0)
-      likeduser = models.ManyToManyField(User, related_name="likedusers", default = 0)
+      likers = models.ManyToManyField(User, related_name="liked", default = 0)
       created_at = models.DateTimeField(auto_now_add = True)
       updated_at = models.DateTimeField(auto_now = True)
       objects = SecretManager()
