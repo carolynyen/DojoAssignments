@@ -31,8 +31,8 @@ class UserManager(models.Manager):
         if len(postData['password']) < 1:
             errorlist.append('Must fill in a password!')
             status = False
-        if len(postData['password']) > 8:
-            errorlist.append('Password must be less than 8 characters.')
+        elif len(postData['password']) < 8:
+            errorlist.append('Password must be more than 8 characters.')
             status = False
         if len(postData['email']) < 1:
             errorlist.append('Must fill in Email!')

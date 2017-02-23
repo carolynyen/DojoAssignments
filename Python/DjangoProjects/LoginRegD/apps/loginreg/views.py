@@ -9,6 +9,7 @@ def index(request):
 
 def register(request):
     if request.method == "GET":
+        messages.error(request, "Nice try. Register first.")
         return redirect('/')
     user = User.objects.register(request.POST)
     if 'errors' in user:
@@ -24,14 +25,17 @@ def register(request):
 
 def success(request):
     if request.session['success'] == False:
+        messages.error(request, "Register or log in first.")
         return redirect('/')
     if 'userid' not in request.session:
+        messages.error(request, "Log in or Register first.")
         return redirect('/')
     context = {'user': User.objects.all(), 'loggeduser': User.objects.filter(id=request.session['userid'])[0]}
     return render(request, 'loginreg/success.html', context)
 
 def login(request):
     if request.method == "GET":
+        messages.error(request, "Nice try. Log in first.")
         return redirect('/')
     user = User.objects.login(request.POST)
     if 'errors' in user:
@@ -47,12 +51,14 @@ def login(request):
 
 def delete(request, id):
     if request.method == "GET":
+        messages.error(request, "Nice try. Are you a hacker?")
         return redirect('/')
     User.objects.filter(id=id).delete()
     return redirect('/success')
 
 def logout(request):
     if request.method == "GET":
+        messages.error(request, "How can you log out with out having logged in?")
         return redirect('/')
     request.session['success'] = False
     del request.session['userid']
