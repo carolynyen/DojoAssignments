@@ -104,7 +104,7 @@ class Secret(models.Model):
       content = models.CharField(max_length=1000)
       creator = models.ForeignKey(User, related_name="users")
       likes = models.IntegerField(default=0)
-      likeduser = models.ForeignKey(User, related_name="likedusers", default = 0)
+      likeduser = models.ManyToManyField(User, related_name="likedusers", default = 0)
       created_at = models.DateTimeField(auto_now_add = True)
       updated_at = models.DateTimeField(auto_now = True)
       objects = SecretManager()

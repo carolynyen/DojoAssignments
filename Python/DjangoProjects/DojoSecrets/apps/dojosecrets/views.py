@@ -81,16 +81,22 @@ def showpopular(request):
     context = {'user': user[:10], 'loggeduser': User.objects.filter(id=request.session['userid'])[0]}
     return render(request, 'dojosecrets/popularsecrets.html', context)
 
-def addlike1(request, id):
+def addlike1(request, secretid, userid):
     if request.method == "GET":
         return redirect('/')
-    secret = Secret.objects.filter(id = id).update(likes=F('likes') + 1, likeduser = User.objects.get(id = request.session['userid']))
+    this_secret = Secret.objects.filter(id = secretid).update(likes=F('likes') + 1)
+    this_secret = Secret.objects.get(id = secretid)
+    this_user = User.objects.get(id = userid)
+    this_secret.likeduser.add(this_user)
     return redirect('/success')
 
-def addlike2(request, id):
+def addlike2(request, secretid, userid):
     if request.method == "GET":
         return redirect('/')
-    secret = Secret.objects.filter(id = id).update(likes=F('likes') + 1, likeduser = User.objects.get(id = request.session['userid']))
+    this_secret = Secret.objects.filter(id = secretid).update(likes=F('likes') + 1)
+    this_secret = Secret.objects.get(id = secretid)
+    this_user = User.objects.get(id = userid)
+    this_secret.likeduser.add(this_user)
     return redirect('/popularsecrets')
 
 def logout(request):
