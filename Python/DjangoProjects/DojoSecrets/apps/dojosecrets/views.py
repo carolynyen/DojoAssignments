@@ -73,7 +73,7 @@ def addsecret(request):
         return redirect('/success')
 
 def showpopular(request):
-    if request.session['success'] == False:
+    if 'success' not in request.session or request.session['success'] == False :
         return redirect('/')
     if 'userid' not in request.session:
         return redirect('/')
@@ -84,13 +84,13 @@ def showpopular(request):
 def addlike1(request, id):
     if request.method == "GET":
         return redirect('/')
-    secret = Secret.objects.filter(id = id).update(likes=F('likes') + 1)
+    secret = Secret.objects.filter(id = id).update(likes=F('likes') + 1, likeduser = User.objects.get(id = request.session['userid']))
     return redirect('/success')
 
 def addlike2(request, id):
     if request.method == "GET":
         return redirect('/')
-    secret = Secret.objects.filter(id = id).update(likes=F('likes') + 1)
+    secret = Secret.objects.filter(id = id).update(likes=F('likes') + 1, likeduser = User.objects.get(id = request.session['userid']))
     return redirect('/popularsecrets')
 
 def logout(request):
