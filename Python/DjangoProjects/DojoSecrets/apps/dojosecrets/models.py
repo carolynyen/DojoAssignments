@@ -89,6 +89,7 @@ class User(models.Model):
 
 
 class SecretManager(models.Manager):
+    
     def validate(self, postData):
         if len(postData['secret']) < 1:
             return {'errors': 'nothing in secret box'}

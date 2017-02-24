@@ -53,11 +53,14 @@ def delete(request, id):
     User.objects.filter(id=id).delete()
     return redirect('/success')
 
-def deletesecret(request, id):
+def deletesecret(request, word, id):
     if request.method == "GET":
         return redirect('/')
     Secret.objects.filter(id=id).delete()
-    return redirect('/success')
+    if word == "recent":
+        return redirect('/success')
+    else:
+        return redirect('/popularsecrets')
 
 def addsecret(request):
     if request.method == "GET":
@@ -79,23 +82,16 @@ def showpopular(request):
     context = {'user': user[:10], 'loggeduser': User.objects.filter(id=request.session['userid'])[0]}
     return render(request, 'dojosecrets/popularsecrets.html', context)
 
-def addlike1(request, secretid):
+def addlike(request, word, secretid):
     if request.method == "GET":
         return redirect('/')
     secret = Secret.objects.addlike(secretid, request.session['userid'])
     if 'errors' in secret:
         messages.error(request, secret['errors'])
+    if word == 'recent':
         return redirect('/success')
-    return redirect('/success')
-
-def addlike2(request, secretid):
-    if request.method == "GET":
-        return redirect('/')
-    secret = Secret.objects.addlike(secretid, request.session['userid'])
-    if 'errors' in secret:
-        messages.error(request, secret['errors'])
+    else:
         return redirect('/popularsecrets')
-    return redirect('/popularsecrets')
 
 def logout(request):
     if request.method == "GET":
