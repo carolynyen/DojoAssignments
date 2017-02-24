@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Travel Buddy| Travel Dashboard</title>
+        {%load staticfiles%}
+        <link rel="stylesheet" type="text/css" href={%static "travelbuddy/css/main.css"%}>
+    </head>
+    <body>
+        <form action='/logout' method='POST'>
+            {% csrf_token %}
+            <input type="submit" value="Log Out" class="logout">
+        </form>
+
+        {% if request.session.success == 'success' %}
+        <h2>Hello, {{loggeduser.first_name}}!</h2>
+        {% endif %}
+        <h3>Your Trip Schedules</h3>
+        <table class="mytable">
+          <thead>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Plan</th>
+            <th>Remove?</th>
+          </thead>
+          <tbody>
+            {%for schedule in schedules%}
+            <tr>
+            <td>
+                <form action='/gotodestination/{{schedule.id}}' method='POST'>
+                        {% csrf_token %}
+                        <input type="submit" value='{{schedule.destination}}' class="gotodestination">
+                </form>
+            </td>
+            <td>{{schedule.travel_start_date}}</td>
+            <td>{{schedule.travel_end_date}}</td>
+            <td>{{schedule.description}}</td>
+            <td>
+                {% if loggeduser == schedule.creator %}
+                <form action='/delete/{{schedule.id}}' method='POST'>
+                    {% csrf_token %}
+                    <input type="submit" value="delete" class="delete">
+                </form>
+                {% else %}
+                <p>N.A.</p>
+                {% endif %}
+            </td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+
+        <h3>Other User's Travel Plans</h3>
+        <table class="mytable">
+          <thead>
+            <th>Name</th>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Do You Want to Join?</th>
+          </thead>
+          <tbody>
+            {%for user in otherusers%}
+            <tr>
+            <td>{{user.creator.first_name}} {{user.creator.last_name}}</td>
+            <td>
+                <form action='/gotodestination/{{user.id}}' method='POST'>
+                        {% csrf_token %}
+                        <input type="submit" value='{{user.destination}}' class="gotodestination">
+                </form>
+            </td>
+            <td>{{user.travel_start_date}}</td>
+            <td>{{user.travel_end_date}}</td>
+            <td>
+                {% if loggeduser != user.creator %}
+                <form action='/jointrip/{{user.id}}' method='POST'>
+                    {% csrf_token %}
+                    <input type="submit" value="join" class="join">
+                </form>
+               {% endif %}
+            </td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+
+        <form action='/gotoaddplan' method='POST'>
+            {% csrf_token %}
+            <input type="submit" value="Add Travel Plan" class='addplan'>
+        </form>
+    </body>
+</html>
