@@ -79,10 +79,10 @@ def showpopular(request):
     context = {'user': user[:10], 'loggeduser': User.objects.filter(id=request.session['userid'])[0]}
     return render(request, 'dojosecrets/popularsecrets.html', context)
 
-def addlike1(request, secretid, userid):
+def addlike1(request, secretid):
     if request.method == "GET":
         return redirect('/')
-    secret = Secret.objects.addlike(secretid, userid)
+    secret = Secret.objects.addlike(secretid, request.session['userid'])
     if 'errors' in secret:
         messages.error(request, secret['errors'])
         return redirect('/success')
