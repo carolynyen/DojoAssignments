@@ -91,10 +91,10 @@ def addlike1(request, secretid, userid):
         return redirect('/success')
     return redirect('/success')
 
-def addlike2(request, secretid, userid):
+def addlike2(request, secretid):
     if request.method == "GET":
         return redirect('/')
-    secret = Secret.objects.addlike(secretid, userid)
+    secret = Secret.objects.addlike(secretid, request.session['userid'])
     if 'errors' in secret:
         messages.error(request, secret['errors'])
         return redirect('/popularsecrets')
