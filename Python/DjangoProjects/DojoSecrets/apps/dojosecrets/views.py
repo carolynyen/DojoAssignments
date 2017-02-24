@@ -1,7 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import User, Secret
 from django.contrib import messages
-from django.db.models import F
 from django.db.models import Count
 
 # Create your views here.
@@ -65,10 +64,8 @@ def addsecret(request):
         return redirect('/')
     secret = Secret.objects.validate(request.POST)
     if 'errors' in secret:
-        error = secret['errors']
-        for one in error:
-            messages.error(request, one)
-            return redirect('/success')
+        messages.error(request, secret['errors'])
+        return redirect('/success')
     else:
         Secret.objects.create(content=request.POST['secret'], creator= User.objects.get(id=request.session['userid']))
         return redirect('/success')

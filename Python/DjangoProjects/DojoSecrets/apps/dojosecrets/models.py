@@ -90,15 +90,11 @@ class User(models.Model):
 
 class SecretManager(models.Manager):
     def validate(self, postData):
-        errorlist = []
-        status = True
         if len(postData['secret']) < 1:
-            errorlist.append('nothing in secret box')
-            status = False
-        if status == False:
-            return {'errors': errorlist}
+            return {'errors': 'nothing in secret box'}
         else:
             return {}
+
     def addlike(self, secretid, userid):
         if len(Secret.objects.filter(id = secretid).filter(likers__id = userid)) > 0:
             return {'errors': 'You already liked this!!'}
