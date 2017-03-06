@@ -13,11 +13,10 @@ class Deck {
         self.cards = []
         self.oldcards = []
         let suits = ["Clubs","Spades","Hearts","Diamonds"]
-        let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
-//        let numerical_values = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+        let values = ["A":1 , "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "J":11, "Q":12, "K":13]
         for suit in suits {
-            for value in values {
-            self.cards.append(Card(value: value, suit: suit, numerical_value: 1))
+            for (key,value) in values {
+            self.cards.append(Card(value:key, suit: suit, numerical_value: value))
             }
         }
         self.oldcards = self.cards
@@ -69,6 +68,7 @@ print(Deck1.deal())
 Deck1.shuffle()
 var Player1 = Player(name: "Carolyn")
 print(Player1.draw(deck: Deck1))
+print(Player1.hand)
 
 
 
