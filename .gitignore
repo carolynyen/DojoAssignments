@@ -2,5 +2,3 @@
 venv/
 DjangoEnv/
 py2FlaskEnv/
-*.xcworkspace
-*.xcplayground
