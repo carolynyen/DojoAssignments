@@ -4,6 +4,9 @@ struct Card {
     var value: String
     var suit: String
     var numerical_value: Int
+    func show(){
+        print(value, "of", suit, ": value", numerical_value)
+    }
 }
 
 class Deck {
@@ -24,10 +27,13 @@ class Deck {
     func reset() {
         self.cards = self.oldcards
     }
-    func deal() -> Card {
-        let random = Int(arc4random_uniform(UInt32(self.cards.count)))
-        let card = self.cards.remove(at: random)
-        return card
+    func deal() -> Card? {
+        if self.cards.count > 0 {
+            return self.cards.remove(at: 0)
+        }
+        else {
+            return nil
+        }
     }
     func shuffle() {
         for i in 1...100{
@@ -47,10 +53,14 @@ class Player {
     init(name: String) {
         self.name = name
     }
-    func draw(deck: Deck) -> Card {
-        let card = deck.deal()
-        self.hand.append(card)
-        return card
+    func draw(deck: Deck) -> Card? {
+        if let card = deck.deal(){
+            self.hand.append(card)
+            return card
+        }
+        else {
+            return nil
+        }
     }
     func discard(card: Card) -> Bool {
         for i in 0...self.hand.count {
@@ -64,7 +74,6 @@ class Player {
 }
 
 var Deck1 = Deck()
-print(Deck1.deal())
 Deck1.shuffle()
 var Player1 = Player(name: "Carolyn")
 print(Player1.draw(deck: Deck1))

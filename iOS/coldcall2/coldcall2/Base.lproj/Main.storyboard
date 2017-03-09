@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12113" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12078"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="coldcall2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mz5-cE-R6R">
+                                <rect key="frame" x="148" y="28" width="79.5" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="qzi-1A-DAl"/>
+                                    <constraint firstAttribute="width" constant="79.5" id="xg7-0C-Fnf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3K-ZX-suy">
+                                <rect key="frame" x="150.5" y="320.5" width="76" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="51D-LP-Tju">
+                                <rect key="frame" x="156.5" y="543" width="62" height="30"/>
+                                <color key="backgroundColor" red="0.288468004" green="0.90334991170000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="U0G-TU-J3f"/>
+                                    <constraint firstAttribute="width" constant="62" id="uHr-Fs-Nht"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Cold Call"/>
+                                <connections>
+                                    <action selector="coldcall:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ydj-xk-ovn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="y3K-ZX-suy" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="2ij-gs-zQv"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="51D-LP-Tju" secondAttribute="bottom" constant="94" id="FPn-ob-FuR"/>
+                            <constraint firstItem="Mz5-cE-R6R" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="SXF-1K-Wzk"/>
+                            <constraint firstItem="51D-LP-Tju" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ygw-Xs-8My"/>
+                            <constraint firstItem="Mz5-cE-R6R" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bRO-SN-5EB"/>
+                            <constraint firstItem="y3K-ZX-suy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lFc-y3-rmG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="namebox" destination="Mz5-cE-R6R" id="tck-cn-9ZJ"/>
+                        <outlet property="numberbox" destination="y3K-ZX-suy" id="0gH-Ow-TfB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="135.38230884557723"/>
+        </scene>
+    </scenes>
+</document>
