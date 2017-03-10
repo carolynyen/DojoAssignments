@@ -60,14 +60,14 @@ class ViewController: UIViewController {
     func updatenumbers(){
         if let temp = Float(price) {
             let tipamount = temp * (Float(tip)/(100))
+            MLlabel.text = String(format: "%.2f", (tipamount+temp/Float(group)))
             MUlabel.text = String(format: "%.2f", tipamount/Float(group))
-            MLlabel.text = String(format: "%.2f", tipamount)
             let leftamount = temp * (Float(lefttip)/(100))
             LUlabel.text = String(format: "%.2f", leftamount/Float(group))
-            LLlabel.text = String(format: "%.2f", leftamount)
+            LLlabel.text = String(format: "%.2f", leftamount+temp/Float(group))
             let rightamount = temp * (Float(righttip)/(100))
             RUlabel.text = String(format: "%.2f", rightamount/Float(group))
-            RLlabel.text = String(format: "%.2f", rightamount)
+            RLlabel.text = String(format: "%.2f", rightamount+temp/Float(group))
         }
     }
 
