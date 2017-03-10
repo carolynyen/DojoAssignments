@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     @IBAction func submit(_ sender: UIButton) {
         let alert = UIAlertController(title: "Incorrect", message: "message", preferredStyle: UIAlertControllerStyle.alert)
         if let temp = Int(inputnumber.text!) {
-                guessnum = temp
+            guessnum = temp
         }
         else {
             guessnum = 0
