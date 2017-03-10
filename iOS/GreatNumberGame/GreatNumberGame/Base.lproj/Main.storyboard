@@ -95,7 +95,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="guess" destination="ZvK-Zz-BIP" id="6n5-K8-0Uf"/>
                         <outlet property="inputnumber" destination="lSC-rd-aX6" id="AvK-UD-vqX"/>
                     </connections>
                 </viewController>
