@@ -9,17 +9,36 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var numbers = "0"
+    var multiply = false
+    var temp = ""
+    var numbers2 = ""
+    
+    @IBOutlet weak var number: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func multiplybutton(_ sender: UIButton) {
+        multiply = true
+        temp = numbers
+        
+    }
+    @IBAction func button(_ sender: UIButton) {
+        if numbers == "0" {
+            numbers = ""
+        }
+        else {
+            numbers += String(sender.tag)
+        }
+        number.text = numbers
+    }
 
 }
 
