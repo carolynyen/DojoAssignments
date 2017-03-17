@@ -4,6 +4,7 @@ DjangoEnv/
 py2FlaskEnv/
 
 iOS/MonSwifto/*
+iOS/ChorusLine/*
 
 # Exclude the build directory
 build/*
