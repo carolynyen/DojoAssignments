@@ -15,6 +15,8 @@
 		8BD5B9CC1E80A9B900C66763 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5B9CA1E80A9B900C66763 /* LaunchScreen.storyboard */; };
 		8BD5B9D41E80B7E500C66763 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5B9D31E80B7E500C66763 /* CustomCell.swift */; };
 		8BD5B9D61E80B8FD00C66763 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5B9D51E80B8FD00C66763 /* TableViewController.swift */; };
+		8BD5B9DF1E80D0C300C66763 /* ItemCell+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5B9DD1E80D0C300C66763 /* ItemCell+CoreDataClass.swift */; };
+		8BD5B9E01E80D0C300C66763 /* ItemCell+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5B9DE1E80D0C300C66763 /* ItemCell+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		8BD5B9CD1E80A9B900C66763 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BD5B9D31E80B7E500C66763 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		8BD5B9D51E80B8FD00C66763 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		8BD5B9DD1E80D0C300C66763 /* ItemCell+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ItemCell+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8BD5B9DE1E80D0C300C66763 /* ItemCell+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ItemCell+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +48,8 @@
 		8BD5B9B21E80A9B900C66763 = {
 			isa = PBXGroup;
 			children = (
+				8BD5B9DD1E80D0C300C66763 /* ItemCell+CoreDataClass.swift */,
+				8BD5B9DE1E80D0C300C66763 /* ItemCell+CoreDataProperties.swift */,
 				8BD5B9BD1E80A9B900C66763 /* ToDoList App */,
 				8BD5B9BC1E80A9B900C66763 /* Products */,
 			);
@@ -148,6 +154,8 @@
 			files = (
 				8BD5B9C11E80A9B900C66763 /* AddItemController.swift in Sources */,
 				8BD5B9C71E80A9B900C66763 /* ToDoList_App.xcdatamodeld in Sources */,
+				8BD5B9DF1E80D0C300C66763 /* ItemCell+CoreDataClass.swift in Sources */,
+				8BD5B9E01E80D0C300C66763 /* ItemCell+CoreDataProperties.swift in Sources */,
 				8BD5B9D41E80B7E500C66763 /* CustomCell.swift in Sources */,
 				8BD5B9D61E80B8FD00C66763 /* TableViewController.swift in Sources */,
 				8BD5B9BF1E80A9B900C66763 /* AppDelegate.swift in Sources */,
@@ -316,6 +324,7 @@
 				8BD5B9D21E80A9B900C66763 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
