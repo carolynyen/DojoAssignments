@@ -27,15 +27,19 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var namefield: UITextField!
     @IBOutlet weak var colorfield: UITextField!
     @IBOutlet weak var treatfield: UITextField!
+    
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
     @IBOutlet weak var imageView: UIImageView!
+    
     @IBAction func doneedit(_ sender: Any) {
         let data = UIImagePNGRepresentation(imageView.image!) as NSData?
         self.delegate?.edititem(name: namefield.text!, color: colorfield.text!, treat: treatfield.text!, image: data!, indexpath: indexpath!)
         dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func changePhoto(_ sender: Any) {
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
@@ -58,6 +62,7 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.delegate?.removeitem(indexpath: indexpath!)
         dismiss(animated: true, completion: nil)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self

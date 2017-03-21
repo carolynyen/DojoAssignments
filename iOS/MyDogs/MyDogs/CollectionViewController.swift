@@ -68,9 +68,6 @@ class CollectionViewController: UICollectionViewController, ViewControllerDelega
     @IBAction func unwind(_ segue: UIStoryboardSegue){
     }
     
-    @IBAction func unwind2(_ segue: UIStoryboardSegue){
-    }
-    
     func edititem(name: String, color: String, treat: String, image: NSData, indexpath: NSIndexPath) {
         items[indexpath.row].nametext = name
         items[indexpath.row].colortext = color
