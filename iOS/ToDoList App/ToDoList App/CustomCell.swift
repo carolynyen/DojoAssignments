@@ -9,10 +9,6 @@
 import Foundation
 import UIKit
 
-protocol CustomCellDelegate: class {
-//    func additemcell(title: String, description: String, date: String)
-}
-
 class CustomCell: UITableViewCell {
     @IBOutlet weak var titlelabel: UILabel!
     @IBOutlet weak var datelabel: UILabel!
