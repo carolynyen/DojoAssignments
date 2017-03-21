@@ -8,12 +8,15 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class AddItemController: UITableViewController {
     
     weak var delegate: AddTableViewControllerDelegate?
     var item: String?
     var indexpath: NSIndexPath?
+    
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     @IBOutlet weak var itemtextfield: UITextField!
     
@@ -24,6 +27,12 @@ class AddItemController: UITableViewController {
     @IBAction func savepressed(_ sender: Any) {
         let text = itemtextfield.text!
         delegate?.itemsaved(by: self, with: text, at: indexpath)
+        do {
+            try managedObjectContext.save()
+        }
+        catch {
+            print("\(error)")
+        }
     }
     
     override func viewDidLoad() {

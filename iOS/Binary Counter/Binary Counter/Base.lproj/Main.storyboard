@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12113" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VQO-eZ-zUg">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12078"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Table View Controller-->
+        <scene sceneID="gpx-7o-eeb">
+            <objects>
+                <tableViewController id="VQO-eZ-zUg" customClass="TableViewController" customModule="Binary_Counter" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tgn-6l-dwo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y2p-Jo-apa">
+                            <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyCell" id="BfE-pX-Vv7" customClass="CustomCell" customModule="Binary_Counter" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BfE-pX-Vv7" id="Dcs-jS-UNp">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2B-3B-Rzr">
+                                            <rect key="frame" x="325" y="0.0" width="30" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="mh9-dK-6Cb"/>
+                                            </constraints>
+                                            <state key="normal" title="+"/>
+                                            <connections>
+                                                <action selector="buttonpressed:" destination="BfE-pX-Vv7" eventType="touchUpInside" id="Dn4-LQ-yBP"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykU-rd-amG">
+                                            <rect key="frame" x="58" y="0.0" width="259" height="43.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exj-x6-qWa">
+                                            <rect key="frame" x="20" y="0.0" width="30" height="43"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="jGq-Mx-V1r"/>
+                                            </constraints>
+                                            <state key="normal" title="-"/>
+                                            <connections>
+                                                <action selector="buttonpressed:" destination="BfE-pX-Vv7" eventType="touchUpInside" id="xOm-Lf-9NM"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="F2B-3B-Rzr" firstAttribute="leading" secondItem="ykU-rd-amG" secondAttribute="trailing" constant="8" symbolic="YES" id="Bej-K5-Y7i"/>
+                                        <constraint firstAttribute="bottom" secondItem="ykU-rd-amG" secondAttribute="bottom" id="Cb6-Be-21v"/>
+                                        <constraint firstItem="ykU-rd-amG" firstAttribute="leading" secondItem="exj-x6-qWa" secondAttribute="trailing" constant="8" symbolic="YES" id="Icu-he-oR8"/>
+                                        <constraint firstItem="exj-x6-qWa" firstAttribute="top" secondItem="Dcs-jS-UNp" secondAttribute="top" id="Ioy-w6-TQR"/>
+                                        <constraint firstAttribute="bottom" secondItem="exj-x6-qWa" secondAttribute="bottom" id="VWZ-1q-fBB"/>
+                                        <constraint firstItem="F2B-3B-Rzr" firstAttribute="top" secondItem="Dcs-jS-UNp" secondAttribute="top" id="Z6D-1H-Ncl"/>
+                                        <constraint firstAttribute="trailing" secondItem="F2B-3B-Rzr" secondAttribute="trailing" constant="20" symbolic="YES" id="aaX-w4-1L6"/>
+                                        <constraint firstAttribute="bottom" secondItem="F2B-3B-Rzr" secondAttribute="bottom" id="bOd-X8-Fpg"/>
+                                        <constraint firstItem="ykU-rd-amG" firstAttribute="top" secondItem="Dcs-jS-UNp" secondAttribute="top" id="jyU-gi-M6A"/>
+                                        <constraint firstItem="exj-x6-qWa" firstAttribute="leading" secondItem="Dcs-jS-UNp" secondAttribute="leading" constant="20" symbolic="YES" id="lyD-dY-99w"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="number" destination="ykU-rd-amG" id="8O0-JL-Oyd"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VQO-eZ-zUg" id="SOA-8b-slu"/>
+                            <outlet property="delegate" destination="VQO-eZ-zUg" id="cVG-PR-pCU"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="totallabel" destination="y2p-Jo-apa" id="y2f-LO-cRu"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VVd-A2-p8d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="472.80000000000001" y="117.39130434782609"/>
+        </scene>
+    </scenes>
+</document>
