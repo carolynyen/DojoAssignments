@@ -39,6 +39,7 @@ class TableViewController: UITableViewController, AddItemControllerDelegate{
             item.titletext = title
             item.descriptiontext = description
             item.datetext = date
+            item.checked = false
             items.append(item)
         do {
             try managedObjectContext.save()
@@ -58,6 +59,12 @@ class TableViewController: UITableViewController, AddItemControllerDelegate{
         cell.titlelabel.text = items[indexPath.row].titletext
         cell.descriptlabel.text = items[indexPath.row].descriptiontext
         cell.datelabel.text = items[indexPath.row].datetext
+        if items[indexPath.row].checked == true {
+            cell.accessoryType = .checkmark
+        }
+        else {
+            cell.accessoryType = .none
+        }
         return cell
     }
     
@@ -65,11 +72,20 @@ class TableViewController: UITableViewController, AddItemControllerDelegate{
         if let cell = tableView.cellForRow(at: indexPath) {
             if cell.accessoryType == .checkmark {
                 cell.accessoryType = .none
+                items[indexPath.row].checked = false
             }
             else {
                 cell.accessoryType = .checkmark
+                items[indexPath.row].checked = true
             }
         }
+        do {
+            try managedObjectContext.save()
+        }
+        catch {
+            print("\(error)")
+        }
+        tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

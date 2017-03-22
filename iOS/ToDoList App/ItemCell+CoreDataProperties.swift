@@ -2,7 +2,7 @@
 //  ItemCell+CoreDataProperties.swift
 //  ToDoList App
 //
-//  Created by Carolyn Yen on 3/20/17.
+//  Created by Carolyn Yen on 3/21/17.
 //  Copyright © 2017 frandz. All rights reserved.
 //
 
@@ -19,5 +19,6 @@ extension ItemCell {
     @NSManaged public var datetext: String?
     @NSManaged public var descriptiontext: String?
     @NSManaged public var titletext: String?
+    @NSManaged public var checked: Bool
 
 }
