@@ -10,15 +10,17 @@ import Foundation
 import UIKit
 
 protocol ViewControllerDelegate: class {
-    func itemsaved()
+    func itemsaved(by controller: FirstViewController, thing: String)
 }
 
 class SecondViewController: UIViewController, ViewControllerDelegate{
     
-    func itemsaved() {
-        print("hi")
+    @IBOutlet weak var label: UILabel!
+    
+    func itemsaved(by: FirstViewController, thing: String) {
+        label.text = thing
+        print("hi \(thing)")
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +30,13 @@ class SecondViewController: UIViewController, ViewControllerDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("SecondViewController viewWillAppear")
+        let viewController = self.tabBarController?.viewControllers?[1] as? FirstViewController
+        viewController?.delegate = self
+        self.tabBarController?.selectedIndex = 1
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
     
 }

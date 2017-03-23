@@ -55,21 +55,23 @@ class ViewController: UIViewController {
         }
         if sender.tag == 19 {
             if multiply == true {
-                number.text = String(Float(numbers)! * Float(numbers2)!)
+                numbers = String(Float(numbers)! * Float(numbers2)!)
                 multiply = false
             }
             else if add == true {
-                number.text = String(Float(numbers)! + Float(numbers2)!)
+                numbers = String(Float(numbers)! + Float(numbers2)!)
                 add = false
             }
             else if minus == true {
-                number.text = String(Float(numbers)! - Float(numbers2)!)
+                numbers = String(Float(numbers)! - Float(numbers2)!)
                 minus = false
             }
             else if divide == true {
-                number.text = String(Float(numbers)! / Float(numbers2)!)
+                numbers = String(Float(numbers)! / Float(numbers2)!)
                 divide = false
             }
+            number.text = numbers
+            numbers2 = ""
         }
         else if sender.tag == 11 {
             numbers = "0"
@@ -80,23 +82,40 @@ class ViewController: UIViewController {
         else {
             if multiply == true || add == true || minus == true || divide == true {
                 if sender.tag == 10 && decimal == false {
-                    numbers += "."
+                    numbers2 += "."
                     decimal = true
+                }
+                else if sender.tag == 12{
+                    
+                    if numbers2[numbers2.startIndex] == "-" {
+                        numbers2.remove(at: numbers2.startIndex)
+                    }
+                    else {
+                        numbers2 = "-" + numbers2
+                    }
                 }
                 else if sender.tag != 10 {
                     numbers2 += String(sender.tag)
-                    number.text = numbers2
                 }
+                number.text = numbers2
             }
             else {
                 if sender.tag == 10 && decimal == false {
                     numbers += "."
                     decimal = true
                 }
+                else if sender.tag == 12{
+                    
+                    if numbers[numbers.startIndex] == "-" {
+                       numbers.remove(at: numbers.startIndex)
+                    }
+                    else {
+                        numbers = "-" + numbers
+                    }
+                }
                 else if sender.tag != 10{
                     numbers += String(sender.tag)
                 }
-                print(numbers)
                 number.text = numbers
             }
         }

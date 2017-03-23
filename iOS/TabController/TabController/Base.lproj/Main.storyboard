@@ -32,6 +32,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Second" id="0bl-0s-yko"/>
+                    <connections>
+                        <outlet property="label" destination="jsb-Cu-ZtN" id="KJe-WB-cxm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -40,9 +43,10 @@
         <!--Tab Bar Controller-->
         <scene sceneID="6oe-hO-YfG">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Zbc-VJ-8Sj" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="mytabcontroller" automaticallyAdjustsScrollViewInsets="NO" id="Zbc-VJ-8Sj" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Q3R-RP-6Su">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
@@ -74,6 +78,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jU0-4R-MXK">
+                                <rect key="frame" x="120" y="394" width="150" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Show Action"/>
+                                <connections>
+                                    <action selector="showaction:" destination="Ye2-jw-C1X" eventType="touchUpInside" id="GDa-hB-drp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -81,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bqI-QX-Lwa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="650" y="913"/>
+            <point key="canvasLocation" x="648.79999999999995" y="912.5937031484259"/>
         </scene>
     </scenes>
 </document>
