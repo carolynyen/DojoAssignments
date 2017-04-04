@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B10252E1E89B61100AED223 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8B10252D1E89B61100AED223 /* GameScene.sks */; };
+		8B1025301E89B64000AED223 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10252F1E89B64000AED223 /* GameScene.swift */; };
+		8B1025341E89B85200AED223 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1025331E89B85200AED223 /* GameViewController.swift */; };
 		8B9545ED1E793EB2002AD642 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9545EC1E793EB2002AD642 /* AppDelegate.swift */; };
 		8B9545EF1E793EB2002AD642 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9545EE1E793EB2002AD642 /* ViewController.swift */; };
 		8B9545F21E793EB2002AD642 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B9545F01E793EB2002AD642 /* Main.storyboard */; };
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B10252D1E89B61100AED223 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		8B10252F1E89B64000AED223 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		8B1025331E89B85200AED223 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		8B9545E91E793EB2002AD642 /* ChorusLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChorusLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9545EC1E793EB2002AD642 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B9545EE1E793EB2002AD642 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,9 +106,12 @@
 				8B9545EC1E793EB2002AD642 /* AppDelegate.swift */,
 				8B9545EE1E793EB2002AD642 /* ViewController.swift */,
 				8B9545F01E793EB2002AD642 /* Main.storyboard */,
+				8B1025331E89B85200AED223 /* GameViewController.swift */,
 				8B9545F31E793EB2002AD642 /* Assets.xcassets */,
 				8B9545F51E793EB2002AD642 /* LaunchScreen.storyboard */,
 				8B9545F81E793EB2002AD642 /* Info.plist */,
+				8B10252D1E89B61100AED223 /* GameScene.sks */,
+				8B10252F1E89B64000AED223 /* GameScene.swift */,
 			);
 			path = ChorusLine;
 			sourceTree = "<group>";
@@ -235,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B10252E1E89B61100AED223 /* GameScene.sks in Resources */,
 				8B9545F71E793EB2002AD642 /* LaunchScreen.storyboard in Resources */,
 				8B9545F41E793EB2002AD642 /* Assets.xcassets in Resources */,
 				8B9545F21E793EB2002AD642 /* Main.storyboard in Resources */,
@@ -262,6 +272,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B1025341E89B85200AED223 /* GameViewController.swift in Sources */,
+				8B1025301E89B64000AED223 /* GameScene.swift in Sources */,
 				8B9545EF1E793EB2002AD642 /* ViewController.swift in Sources */,
 				8B9545ED1E793EB2002AD642 /* AppDelegate.swift in Sources */,
 			);
@@ -518,6 +530,7 @@
 				8B9546131E793EB2002AD642 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B9546141E793EB2002AD642 /* Build configuration list for PBXNativeTarget "ChorusLineTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +539,7 @@
 				8B9546161E793EB2002AD642 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B9546171E793EB2002AD642 /* Build configuration list for PBXNativeTarget "ChorusLineUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +548,7 @@
 				8B9546191E793EB2002AD642 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
