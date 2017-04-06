@@ -6,11 +6,12 @@ py2FlaskEnv/
 iOS/MonSwifto/*
 iOS/ChorusLine/*
 
-node-modules/
-node-modules/*
-*~/node-modules
-*/node-modules
-*/node-modules/*
+node_modules/
+node_modules/*
+*~/node_modules
+*/node_modules
+*/node_modules/*
+/node_modules
 
 # Exclude the build directory
 build/*

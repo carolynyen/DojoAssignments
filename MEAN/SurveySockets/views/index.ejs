@@ -1,0 +1,47 @@
+<html>
+<head>
+<title></title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            var socket = io.connect();
+            $('button').click(function (){
+                socket.emit("button_clicked", {reason: "because I want to learn about sockets!"});
+            });
+            $('#submit').click(function (){
+                var formdata = $("#myform").serializeArray();
+                formdata = {name: formdata[0].value, location: formdata[1].value, language: formdata[2].value, comment: formdata[3].value};
+                socket.emit("posting_form", formdata);
+            });
+            socket.on('server_response', function (data){
+                console.log('The server says: ' + data.response);
+            });
+            socket.on('updated_message', function (data){
+                $('#alert').html(`<h4>${JSON.stringify(data)}</h4><h4>Name: ${data.name}</h4><h4>Location: ${data.location}</h4><h4>Language: ${data.language}</h4><h4>Comment: ${data.comment}</h4>`);
+            });
+            socket.on('random_number', function (data){
+                $('#alert').append(`<h4>${JSON.stringify(data)}</h4>`);
+            });
+        })
+    </script>
+</head>
+<body>
+    <button>I AM A BUTTON!</button>
+   <div id="alert"></div>
+    <h2>Fill now</h2>
+    <form id ="myform">
+        Name: <input type = "text" name = "name">
+        Dojo Location: <select name="location">
+            <option value="Silicon Valley">Silicon Valley</option>
+            <option value="Seattle">Seattle</option>
+        </select>
+        Favorite Language: <select name="language">
+            <option value="Python">Python</option>
+            <option value="JavaScript">JavaScript</option>
+        </select>
+        Comment(optional): <input type="field" name="description">
+        <input type="button" id="submit" value="submit">
+    </form>
+</body>
+</html>
