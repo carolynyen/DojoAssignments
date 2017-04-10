@@ -18,18 +18,18 @@
                 console.log('The server says: ' + data.response);
             });
             socket.on('updated_message', function (data){
-                $('#alert').html(`<h4>${JSON.stringify(data)}</h4><h4>Name: ${data.name}</h4><h4>Location: ${data.location}</h4><h4>Language: ${data.language}</h4><h4>Comment: ${data.comment}</h4>`);
+                $('#alert').html(`<h4>This is the object: ${JSON.stringify(data)}</h4><h4>Name: ${data.name}</h4><h4>Location: ${data.location}</h4><h4>Language: ${data.language}</h4><h4>Comment: ${data.comment}</h4>`);
             });
             socket.on('random_number', function (data){
-                $('#alert').append(`<h4>${JSON.stringify(data)}</h4>`);
+                $('#alert').append(`<h4>The server gave you a lucky number: ${JSON.stringify(data)}   ...Lucky you!</h4>`);
             });
         })
     </script>
 </head>
 <body>
-    <button>I AM A BUTTON!</button>
+    <!-- <button>I AM A BUTTON!</button> -->
    <div id="alert"></div>
-    <h2>Fill now</h2>
+    <h2>Fill this form now!</h2>
     <form id ="myform">
         Name: <input type = "text" name = "name">
         Dojo Location: <select name="location">

@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>Chat</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            var socket = io.connect();
+            $('#send').click(function (){
+                var data = $("#field").find('input[name="name"]').val()
+                socket.emit("new_message", data);
+            });
+            socket.on('new_user', function (data){
+                $('#text').html(`<h2>hey</h2>`);
+            });
+        })
+    </script>
+</head>
+<body>
+
+    <div id="text"></div>
+     <input type="text" name="name" id="field">
+   <button id ="send">Send</button>
+</body>
+</html>

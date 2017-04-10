@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Quoting Dojo</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+        })
+
+    </script>
+</head>
+<body>
+    <div id ="body">
+        <% if(typeof(errors) != 'undefined' ) { %>
+       <% for (var x in errors) { %>
+       <h3><%= errors[x].message %></h3>
+       <% } %>
+       <% } %>
+        <% if (users){ %>
+        <% for (var user in users){ %>
+        <h2>Name: <%= users[user].name %>, Age: <%= users[user].age %></h2>
+        <% } %>
+        <% } %>
+        <h2>Welcome to QuotingDojo</h2>
+        <form id="form" action="/users" method="post">
+            Your Name: <input type="text" name="name">
+            Your Quote: <input type="text" name="quote">
+            <input type="submit" value="Add my quote!">
+        </form>
+    </div>
+</body>
+</html>
