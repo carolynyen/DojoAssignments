@@ -15,16 +15,14 @@
        <h3><%= errors[x].message %></h3>
        <% } %>
        <% } %>
-        <% if (users){ %>
-        <% for (var user in users){ %>
-        <h2>Name: <%= users[user].name %>, Age: <%= users[user].age %></h2>
-        <% } %>
-        <% } %>
         <h2>Welcome to QuotingDojo</h2>
-        <form id="form" action="/users" method="post">
+        <form action="/quotes" method="post">
             Your Name: <input type="text" name="name">
             Your Quote: <input type="text" name="quote">
             <input type="submit" value="Add my quote!">
+        </form>
+        <form action="/quotes" method="get">
+            <input type="submit" value="Skip to quotes!">
         </form>
     </div>
 </body>

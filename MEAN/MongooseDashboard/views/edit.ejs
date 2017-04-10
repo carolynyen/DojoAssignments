@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>Mongoose Dashboard</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id ="body">
+        <% if(typeof(errors) != 'undefined' ) { %>
+       <% for (var x in errors) { %>
+       <h3><%= errors[x].message %></h3>
+       <% } %>
+       <% } %>
+        <h2>Edit this hawk</h2>
+        <form action="/hawks/edit/<%=hawk[0].id%>" method="post">
+            Name: <input type="text" name="name" value="<%=hawk[0].name%>">
+            Age: <input type="text" name="age" value="<%=hawk[0].age%>">
+            <input type="submit" value="Edit this hawk!">
+        </form>
+        <form action="/" method="get">
+            <input type="submit" value="All Hawks">
+        </form>
+    </div>
+</body>
+</html>

@@ -2,43 +2,64 @@ var express = require("express");
 var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
+var moment = require('moment');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/basic_mongoose');
 mongoose.Promise = global.Promise;
 
-var UserSchema = new mongoose.Schema({
- name: String,
- age: Number
-}, {timestamps: true})
-mongoose.model('User', UserSchema);
-var User = mongoose.model('User');
+var QuoteSchema = new mongoose.Schema({
+ name: { type: String, required: true, minlength: 2},
+ quote: { type: String, required: true, minlength: 2},
+ created_at: { type: Date, default: Date.now},
+ date: {type: String, default: ""},
+ likes: {type: Number, default: 0}
+})
+mongoose.model('Quotes', QuoteSchema);
+var Quote = mongoose.model('Quotes');
 
 var path = require('path');
 var server = app.listen(8000, function() {
  console.log("listening on port 8000");
 });
 
-app.get('/', function (req, res){
-    var users;
-    User.find({}, function(err, users) {
+app.get('/quotes', function (req, res){
+    Quote.find({}, function(err, quotes) {
         if(err) {
             console.log(err);
         }
         else {
-            res.render('index', {users: users});
+            res.render('quotes', {quotes: quotes});
         }
-   })
+   }).sort({"likes":-1})
 });
-app.post('/quotes', function (req, res){
-    var user = new User({name: req.body.name, age: req.body.age});
-    user.save(function(err) {
+app.get('/', function (req, res){
+    res.render('index');
+});
+
+app.post('/quotes/:id', function (req, res){
+    var id = req.params.id;
+    Quote.update({_id: id}, {$inc: {likes: 1}}, function(err){
         if(err) {
-            console.log('something went wrong');
-            res.render('index', {title: 'you have errors!', errors: user.errors})
+            console.log(err);
         }
         else {
-            console.log('successfully added a user!');
+            res.redirect('/quotes');
+        }
+    })
+});
+
+app.post('/quotes', function (req, res){
+    var quote = new Quote({name: req.body.name, quote: req.body.quote});
+    var new_date = moment(quote.created_at).format('MMMM Do YYYY, [at] h:mm:ss a');
+    quote.date = (new_date);
+    quote.save(function(err) {
+        if(err) {
+            console.log('something went wrong');
+            res.render('index', {errors: quote.errors})
+        }
+        else {
+            console.log('successfully added a quote!');
             res.redirect('/');
         }
     })

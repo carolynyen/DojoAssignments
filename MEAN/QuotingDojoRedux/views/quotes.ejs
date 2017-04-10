@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>Quoting Dojo Quotes</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+        })
+    </script>
+</head>
+<body>
+    <div id ="body">
+        <h2>Here are the awesome quotes!</h2>
+        <% if (quotes){ %>
+        <% for (var quote in quotes){ %>
+        <h3>"<%= quotes[quote].quote %>"</h3>
+        <h4>   - <%= quotes[quote].name %> at <%= quotes[quote].date %></h4>
+        <h4><%= quotes[quote].likes %> Likes</h4>
+        <form action="/quotes/<%=quotes[quote].id%>" method="post">
+            <input type="submit" value="Like this">
+        </form>
+        <hr>
+        <% } %>
+        <% } %>
+        <form action="/" method="get">
+            <input type="submit" value="Add more!">
+        </form>
+    </div>
+</body>
+</html>
