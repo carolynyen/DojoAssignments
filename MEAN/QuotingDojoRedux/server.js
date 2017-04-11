@@ -9,7 +9,7 @@ mongoose.connect('mongodb://localhost/basic_mongoose');
 mongoose.Promise = global.Promise;
 
 var QuoteSchema = new mongoose.Schema({
- name: { type: String, required: true, minlength: 2},
+ name: { type: String, required: [true, 'error message'], minlength: 2},
  quote: { type: String, required: true, minlength: 2},
  created_at: { type: Date, default: Date.now},
  date: {type: String, default: ""},
@@ -55,7 +55,7 @@ app.post('/quotes', function (req, res){
     quote.date = (new_date);
     quote.save(function(err) {
         if(err) {
-            console.log('something went wrong');
+            console.log('something went wrong', err);
             res.render('index', {errors: quote.errors})
         }
         else {

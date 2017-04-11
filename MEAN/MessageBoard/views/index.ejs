@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Message Board</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id ="body">
+        <% if(typeof(errors) != 'undefined' ) { %>
+       <% for (var x in errors) { %>
+       <h3><%= errors[x].message %></h3>
+       <% } %>
+       <% } %>
+        <h2>The Dojo Message Board</h2><hr>
+        <form action="/messages" method="post">
+            Name: <input type="text" name="name">
+            Message: <input type="text" name="text">
+            <input type="submit" value="Post message">
+        </form>
+        <% if (typeof(messages) != 'undefined') { %>
+       <% for (var i in messages) { %>
+       <h2>Name: <%= messages[i].name %></h2>
+       <h2>Message: <%= messages[i].text %></h2>
+       <h2>Comments:</h2>
+       <% for (y of messages[i].comments) { %>
+            <h4><%=y.name %> wrote "<%=y.text %>"</h4>
+        <% } %>
+       <form action="/comments/<%=messages[i].id%>" method="post">
+           Name: <input type="text" name="name">
+           Comment: <input type="text" name="comment">
+           <input type="submit" value="Post comment">
+       </form>
+       <hr>
+       <% } %>
+       <% } %>
+    </div>
+</body>
+</html>
