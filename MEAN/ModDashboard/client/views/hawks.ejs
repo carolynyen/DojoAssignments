@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>Mongoose Dashboard</title>
+</head>
+<body>
+    <div id ="body">
+        <h2>Here are all the hawks!</h2>
+        <% if (hawks){ %>
+        <% for (var hawk in hawks){ %>
+        <h3>Name: <%= hawks[hawk].name %></h3>
+        <form action="/hawks/edit/<%=hawks[hawk].id%>" method="get">
+            <input type="submit" value="Edit">
+        </form>
+        <form action="/hawks/<%=hawks[hawk].id%>" method="get">
+            <input type="submit" value="Details">
+        </form>
+        <form action="/hawks/destroy/<%=hawks[hawk].id%>" method="post">
+            <input type="submit" value="Delete">
+        </form>
+        <hr>
+        <% } %>
+        <% } %>
+        <form action="/hawks/new" method="get">
+            <input type="submit" value="Add more hawks!">
+        </form>
+    </div>
+</body>
+</html>
