@@ -1,0 +1,17 @@
+{
+  "name": "FirstAngular",
+  "homepage": "https://github.com/carolynyen/DojoAssignments",
+  "authors": [
+    "Carolyn <whitehawk6888@yahoo.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

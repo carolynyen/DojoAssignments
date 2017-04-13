@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <meta charset="utf-8">
+        <title>Angular</title>
+        <script src = "bower_components/angular/angular.js"></script>
+    </head>
+    <script>
+        var app = angular.module('app', []);
+        app.controller('PlayersController', ['$scope', function($scope) {
+        //javascript that controls the Player view goes here:
+        }]);
+        app.controller('divController', ['$scope', function($scope) {
+            $scope.myName = 'Car';
+            $scope.myFavoriteLanguage = 'JavaScript';
+            $scope.myFavoriteJSLibrary = 'Angular';
+        }]);
+        app.controller('TeamsController', ['$scope', function($scope) {
+        //javascript that controls the Teams view goes here:
+        }]);
+        app.factory('PlayerFactory', ['$http', function($http) {
+            var players = {}; //object that holds methods and public properties for players.  Remember OOP - there are different ways of creating objects and adding methods and properties to that object.
+            return players;
+        }]);
+        app.factory('TeamFactory', ['$http', function($http) {
+            return {
+            //object that holds methods and public properties for teams.  Remember OOP - there are different ways of creating objects and adding methods and properties to that object.
+            };
+        }]);
+        app.controller('studentsController', function ($scope){
+          $scope.students = [
+            {name: 'Mike', age: 34},
+            {name: 'John', age: 24},
+            {name: 'Trey', age: 24},
+            {name: 'India', age: 35}
+          ];
+          $scope.addStudent = function(){
+              $scope.students.push($scope.newStudent);
+              $scope.newStudent = {};
+          }
+      });
+    </script>
+    <body ng-init="dojo='ninja'">
+        <h1>{{dojo}}</h1>
+        <h1 ng-bind="dojo"></h1>
+        <div ng-controller='divController'>
+            <h2>Hello my name is {{myName}}, my favorite language is {{myFavoriteLanguage}}, because the {{myFavoriteJSLibrary}} library is awesome.</h2>
+        </div>
+        <div ng-controller='studentsController'>
+        <ul>
+            <li ng-repeat="student in students">{{ student.name }}, {{ student.age }}</li>
+        </ul>
+        <form>
+            Name: <input type='text' ng-model='newStudent.name'>
+            Age: <input type='text' ng-model='newStudent.age'>
+            <input type='submit' value='add new student' ng-click='addStudent()'>
+        </form>
+        </div>
+    </body>
+</html>

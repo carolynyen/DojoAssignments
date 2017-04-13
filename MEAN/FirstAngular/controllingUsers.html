@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Controlling Users</title>
+        <script src="bower_components/angular/angular.js"></script>
+    </head>
+    <script>
+        var app = angular.module('app', []);
+        app.controller("myController", ['$scope', function($scope){
+            $scope.users = [];
+            $scope.adduser = function(){
+                $scope.users.push($scope.add_user);
+                $scope.add_user = {};
+            }
+            $scope.deleteuser = function(val){
+                for (var i in $scope.users){
+                    if (i == val){
+                        var temp = $scope.users[i]
+                        $scope.users[i] = $scope.users[$scope.users.length-1]
+                        $scope.users[$scope.users.length-1] = temp
+                    }
+                }
+                $scope.users.pop();
+            }
+        }])
+    </script>
+    <body ng-app="app">
+        <div ng-controller='myController'>
+            <form ng-submit="adduser()">
+                First Name: <input type="text" ng-model="add_user.first_name" name="text" placeholder="first name">
+                Last Name: <input type="text" ng-model="add_user.last_name" name="text" placeholder="last name">
+                Favorite Language: <input type="text" ng-model="add_user.fav_lang" name="text" placeholder="favorite language">
+                <input type="submit" id="submit" value="Create user">
+            </form>
+            <div ng-repeat="user in users track by $index">
+                First Name: {{user.first_name}}, Last Name: {{user.last_name}}, Favorite Language: <span ng-bind ="user.fav_lang"></span>
+                <button ng-click = 'deleteuser($index)'>Delete</button>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Factory Intro</title>
+        <script src="bower_components/angular/angular.js"></script>
+    </head>
+    <script>
+        var app = angular.module('app', []);
+        app.factory('studentFactory', function(){
+            var students = [
+                {name: 'Mike', age: 34},
+                {name: 'John', age: 24},
+                {name: 'Trey', age: 24}];
+                var factory = {};
+                factory.getStudents = function (callback){
+                    callback(students);
+                }
+                return factory;
+        })
+        app.controller('studentsController', ['$scope', 'studentFactory', function ($scope, studentFactory){
+            $scope.students = [];
+            studentFactory.getStudents(function (data){
+                $scope.students = data;
+            })
+        }])
+    </script>
+    <body ng-app="app">
+
+    </body>
+</html>

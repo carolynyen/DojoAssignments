@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Products with a Factory</title>
+        <script src="bower_components/angular/angular.js"></script>
+    </head>
+    <script>
+        var app = angular.module('app', []);
+        app.factory('productFactory', ['$http', function($http){
+            var products = [
+                {name: 'Mouse', price: 34, qty: 50},
+                {name: 'Tray', price: 24.32, qty: 50},
+                {name: 'Keyboard', price: 24.4, qty: 50}];
+                var factory = {};
+                factory.getproducts = function (callback){
+                    callback(products);
+                }
+                factory.addproducts = function (product){
+                    products.push(product);
+                }
+                factory.deleteproducts = function (val){
+                    products.splice(products.indexOf(val),1);
+                }
+                factory.buyproducts = function (val){
+                    var prod = products.splice(products.indexOf(val),1);
+                    if(prod[0].qty > 0){
+                        prod[0].qty -= 1
+                    }
+                    products.push(prod[0]);
+                    console.log(products);
+                }
+                return factory;
+        }])
+        app.controller('productsController', ['$scope', 'productFactory', function ($scope, productFactory){
+            $scope.products = [];
+            productFactory.getproducts(function (data){
+                $scope.products = data;
+            })
+            $scope.addproduct = function(){
+                $scope.add_product.price = Number($scope.add_product.price)
+                $scope.add_product.qty = 50;
+                productFactory.addproducts($scope.add_product);
+                $scope.add_product = {};
+            }
+            $scope.deleteproduct = function(val){
+                productFactory.deleteproducts(val);
+            }
+        }])
+        app.controller('ordersController', ['$scope', 'productFactory', function ($scope, productFactory){
+            $scope.products = [];
+            productFactory.getproducts(function (data){
+                $scope.products = data;
+            })
+            $scope.buyproduct = function(val){
+                productFactory.buyproducts(val);
+            }
+        }])
+    </script>
+    <body ng-app="app">
+        <div ng-controller='productsController'>
+            <form ng-submit="addproduct()">
+                Product Name: <input type="text" ng-model="add_product.name" placeholder="name">
+                Product Price: <input type="text" ng-model="add_product.price" placeholder="price">
+                <input type="submit" id="submit" value="Add Product">
+            </form>
+            <div ng-repeat="product in products | orderBy: '-price'">
+                Name: {{product.name}}, Price: {{product.price | currency}}
+                <button ng-click = 'deleteproduct(product)'>Delete</button>
+            </div>
+        </div>
+        <div ng-controller='ordersController'>
+            <br>
+            <div ng-repeat="product in products | orderBy: '-price'">
+                Name: {{product.name}}, Price: {{product.price | currency}}, Qty: {{product.qty}}
+                <button ng-click = 'buyproduct(product)'>Buy</button>
+            </div>
+        </div>
+    </body>
+</html>
