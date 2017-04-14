@@ -1,0 +1,27 @@
+<div ng-controller="CustomizeUsersController">
+    <form ng-submit="adduser()">
+        First Name: <input type="text" ng-model="add_user.first_name" placeholder="first name">
+        Last Name: <input type="text" ng-model="add_user.last_name" placeholder="last name">
+        Favorite Language: <input type="text" ng-model="add_user.fav_lang" placeholder="language">
+        <input type="submit" id="submit" value="Add User">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Favorite Language</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="user in users | orderBy: 'name'" >
+            <tr>
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.fav_lang}}</td>
+                <td><button ng-click = 'deleteuser(user)'>Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

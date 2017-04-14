@@ -1,0 +1,20 @@
+<div ng-controller="TeamsController">
+    <form ng-submit="addteam()">
+        Name: <input type="text" ng-model="add_team.name" placeholder="name">
+        <input type="submit" id="submit" value="Add New Team">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Team Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="team in teams| orderBy: 'name'" >
+            <tr>
+                <td><a href="#!/team/{{team.name}}" ng-bind = 'team.name'></a></td>
+                <td><button ng-click = 'deleteteam(team)'>Remove Team</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

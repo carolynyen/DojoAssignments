@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <title></title>
+ <!-- THESE TWO VERSIONS BELOW MUST MATCH (good thing bower will catch that for us, but be aware if you are using CDN's)!!! -->
+    <script src="angular/angular.js"></script>
+    <script src="angular-route/angular-route.js"></script>
+<script>
+    //  inject the ngRoute dependency in the module.
+    var myApp = angular.module('myApp', ['ngRoute']);
+    //  use the config method to set up routing:
+    myApp.config(function ($routeProvider) {
+      $routeProvider
+        .when('/',{
+            templateUrl: 'partials/customizeUsers.html',
+        })
+        .when('/partial2',{
+            templateUrl: 'partials/userList.html'
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
+    });
+    myApp.controller('CustomizeUsersController', ['userFactory', '$scope', '$location', function (userFactory, $scope,  $location) {
+        $scope.users = [];
+        userFactory.getusers(function (data){
+            $scope.users = data;
+        })
+        $scope.adduser = function(){
+            userFactory.addusers($scope.add_user);
+            $scope.add_user = {};
+            $location.url('/partial2');
+        }
+        $scope.deleteuser = function(val){
+            userFactory.deleteusers(val);
+        }
+    }]);
+    myApp.controller('UserListController', ['userFactory', '$scope', '$location', function ( userFactory, $scope, $location) {
+        $scope.users = [];
+        userFactory.getusers(function (data){
+            $scope.users = data;
+        })
+        $scope.userdeets = function(val){
+                userFactory.getone(function(data){
+                    $scope.users = data;
+                }, val)
+        }
+        $scope.allusers = function(){
+            userFactory.getusers(function (data){
+                $scope.users = data;
+            })}
+        $scope.deleteuser = function(val){
+            userFactory.deleteusers(val);
+            $scope.users = [];
+        }
+    }]);
+    myApp.factory('userFactory', ['$http', '$location', function($location, $http){
+        var users = [
+            {first_name: 'Mouse', last_name: "Ma", fav_lang: "Python"},
+            {first_name: 'Car', last_name: "Me", fav_lang: "Java"},
+            {first_name: 'Katherine', last_name: "Ma", fav_lang: "Chinese"}];
+            var factory = {};
+            factory.getusers = function (callback){
+                callback(users);
+            }
+            factory.addusers = function (user){
+                users.push(user);
+            }
+            factory.deleteusers = function (val){
+                users.splice(users.indexOf(val),1);
+            }
+            factory.getone = function (callback, val){
+                var user = users.splice(users.indexOf(val), 1);
+                users.push(val);
+                callback(user);
+            }
+            return factory;
+    }])
+    </script>
+  </head>
+  <body>
+    <div ng-app='myApp'>
+        <a href="#!/">Partial 1</a> | <a href="#!/partial2">Partial 2</a>
+        <div ng-view="">
+        </div>
+    </div>
+  </body>
+</html>
