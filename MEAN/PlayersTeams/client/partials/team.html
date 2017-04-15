@@ -1,3 +1,8 @@
-<div ng-controller="TeamsController">
-    <h2>hi</h2>
-</div>
+
+<h2>Players in Team '<span ng-bind="teamname"></span>'</h2>
+<ul ng-repeat="player in oneteam">
+    <li ng-bind="player.name"></li>
+</ul>
+<form action="#!/partial2" method="GET">
+    <input type="submit" value="Go back">
+</form>

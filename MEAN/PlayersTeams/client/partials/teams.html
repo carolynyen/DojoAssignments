@@ -12,7 +12,7 @@
         </thead>
         <tbody ng-repeat="team in teams| orderBy: 'name'" >
             <tr>
-                <td><a href="#!/team/{{team.name}}" ng-bind = 'team.name'></a></td>
+                <td><a href="#!/{{team.name}}" ng-bind = 'team.name'></a></td>
                 <td><button ng-click = 'deleteteam(team)'>Remove Team</button></td>
             </tr>
         </tbody>

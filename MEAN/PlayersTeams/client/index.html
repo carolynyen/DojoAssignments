@@ -8,10 +8,6 @@
     var myApp = angular.module('myApp', ['ngRoute']);
     myApp.config(['$routeProvider', function ($routeProvider) {
       $routeProvider
-      .when('/team/:teamname',{
-          templateUrl: 'partials/team.html',
-          controller: "TeamsController"
-      })
       .when('/players',{
           templateUrl: 'partials/players.html',
           controller: "PlayersController"
@@ -22,6 +18,10 @@
         })
         .when('/partial3',{
             templateUrl: 'partials/associations.html',
+            controller: "AssociationsController"
+        })
+        .when('/:teamname',{
+            templateUrl: 'partials/team.html',
             controller: "AssociationsController"
         })
         .otherwise({
@@ -45,18 +45,11 @@
         }
     }]);
     myApp.controller('TeamsController', [ '$scope', 'teamFactory', '$routeParams', function ($scope, teamFactory,  $routeParams) {
-        $scope.$on('$routeChangeSuccess', function() {
-            console.log($routeParams);
-  });
-        console.log($routeParams)
         $scope.teams = [];
         $scope.oneteam = [];
         teamFactory.getteams(function (data){
             $scope.teams = data;
         })
-        // teamFactory.getone($routeParams, function (data){
-        //     $scope.oneteam = data;
-        // })
         $scope.addteam = function(){
             teamFactory.addteams($scope.add_team);
             $scope.add_team = {};
@@ -65,7 +58,7 @@
             teamFactory.deleteteams(val);
         }
     }]);
-    myApp.controller('AssociationsController', ['playerFactory', 'teamFactory', '$scope', function ( playerFactory, teamFactory, $scope) {
+    myApp.controller('AssociationsController', ['playerFactory', 'teamFactory', '$scope', '$routeParams', function ( playerFactory, teamFactory, $scope, $routeParams) {
         $scope.players = [];
         playerFactory.getplayers(function (data){
             $scope.players = data;
@@ -74,6 +67,13 @@
         teamFactory.getteams(function (data){
             $scope.teams = data;
         })
+        $scope.oneteam = [];
+        $scope.teamname = $routeParams.teamname;
+        for (var i = 0; i < $scope.players.length; i++){
+            if ($scope.players[i].team == $routeParams.teamname) {
+                $scope.oneteam.push($scope.players[i]);
+            }
+        }
         $scope.addassoc = function(){
             playerFactory.addplayertoteam($scope.assoc);
             }
@@ -117,10 +117,6 @@
             factory.getteams = function (callback){
                 callback(teams);
             }
-            // factory.getone = function (val, callback){
-            //     // var oneteam = teams.indexOf(val)
-            //     callback(teams);
-            // }
             factory.addteams = function (team){
                 teams.push(team);
             }
