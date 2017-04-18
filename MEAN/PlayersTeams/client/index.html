@@ -4,8 +4,10 @@
     <title>Players and Teams</title>
     <script src="angular/angular.js"></script>
     <script src="angular-route/angular-route.js"></script>
+    <script src="angular-messages/angular-messages.js"></script>
 <script>
-    var myApp = angular.module('myApp', ['ngRoute']);
+
+    var myApp = angular.module('myApp', ['ngRoute', 'ngMessages']);
     myApp.config(['$routeProvider', function ($routeProvider) {
       $routeProvider
       .when('/players',{
@@ -94,7 +96,6 @@
                 callback(players);
             }
             factory.addplayers = function (player){
-                player.team = "";
                 players.push(player);
             }
             factory.addplayertoteam = function (val){

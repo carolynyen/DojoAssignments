@@ -1,8 +1,12 @@
 <div ng-controller="PlayersController">
-    <form ng-submit="addplayer()">
-        Name: <input type="text" ng-model="add_player.name" placeholder="name">
+    <form ng-submit="addplayer()" name="playerForm">
+        Name: <input type="text" name="name" ng-model="add_player.name" placeholder="name" minlength='4' required>
         <input type="submit" id="submit" value="Add Player">
     </form>
+    <div ng-if = "add_player" ng-messages="playerForm.name.$error">
+        <p ng-message="minlength">The player name is too short.</p>
+        <p ng-message="required">The player name is required.</p>
+    </div>
     <table>
         <thead>
             <tr>
