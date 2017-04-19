@@ -1,0 +1,24 @@
+{
+  "name": "DiscussionBoard",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Carolyn <whitehawk6888@yahoo.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/carolynyen/DojoAssignments",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "angular-messages": "^1.6.4",
+    "angular-moment": "^1.0.1",
+    "moment": "^2.18.1"
+  }
+}
