@@ -1,0 +1,37 @@
+<p>Dashboard</p>
+Search Products: <input type="text" ng-model="filter_name" placeholder="search..">
+<div ng-init="limit3 = 2">
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Quantity Left</th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="product in products | filter: filter_name | limitTo: limit3">
+        <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.image}}</td>
+            <td>{{product.qty}} left</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<button ng-hide="limit3 >= products.length"
+        ng-click="limit3 = limit3 + 2">show more products</button>
+
+<h3>Recent Orders</h3>
+<div ng-init="limit2 = 2">
+  <div ng-repeat="order in orders | limitTo: limit2">{{order._user.name}} purchased {{order.qty}} {{order._product.name}}... (<time am-time-ago="order.createdAt"></time>)</div>
+</div>
+<button ng-hide="limit2 >= orders.length"
+        ng-click="limit2 = limit2 + 2">show more orders</button>
+
+
+<h3>New Customers</h3>
+<div ng-init="limit = 3">
+  <div ng-repeat="user in users | limitTo: limit">{{user.name}} joined the store. (<time am-time-ago="user.createdAt"></time>)</div>
+</div>
+<button ng-hide="limit >= users.length"
+        ng-click="limit = limit + 2">show more users</button>

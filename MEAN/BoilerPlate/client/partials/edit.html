@@ -1,0 +1,11 @@
+
+
+<form ng-submit="update(friend._id)">
+    <p>Name: {{friend.name}}, Age: {{friend.age}}, Birthday: {{friend.birthday}}</p>
+    <input type="text" ng-model='editFriend.name' placeholder='{{friend.name}}'>
+    <input type="text" ng-model = 'editFriend.age' placeholder = '{{friend.age}}'>
+    <input type="text" ng-model = 'editFriend.birthday' placeholder = '{{friend.birthday | date: dd/MM/YYYY}}'>
+    <p>If on Safari, must input birthdate as "YYYY-MM-dd" form</p>
+    <input type="submit"  value="Update Friend">
+</form>
+<a href="#!/">Go back</a>

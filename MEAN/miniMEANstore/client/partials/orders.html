@@ -1,0 +1,37 @@
+<p>Add a New Order</p>
+
+{{messages.message}}
+
+<form ng-submit="create()">
+    Customer Name: <select name="test1" ng-model="newOrder._user">
+        <option ng-repeat="user in users" value={{user._id}}>{{user.name}}</option>
+    </select>
+    Order Quantity: <select ng-model="newOrder.qty">
+        <option ng-repeat="qty in [0,1,2,3]" value={{qty}}>{{qty}}</option>
+    </select>
+    Product: <select ng-model="newOrder._product">
+        <option ng-repeat="product in products" value={{product._id}}>{{product.name}}</option>
+    </select>
+    <input type="submit" value='Order'>
+</form>
+Search Orders by User: <input type="text" ng-model="filter_name" placeholder="filter by name">
+<table>
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Date of Order</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="order in orders | filter: filter_name">
+        <tr>
+            <td>{{order._user.name}}</td>
+            <td>{{order._product.name}}</td>
+            <td>{{order.qty}}</td>
+            <td>{{order.createdAt | date: YYYY/MM/dd }}</td>
+            <td><button ng-click="remove(order._id)">Remove</button></td>
+        </tr>
+    </tbody>
+</table>

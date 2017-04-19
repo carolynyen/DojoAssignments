@@ -1,0 +1,17 @@
+{
+  "name": "BoilerPlate",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Carolyn <whitehawk6888@yahoo.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/carolynyen/DojoAssignments",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
