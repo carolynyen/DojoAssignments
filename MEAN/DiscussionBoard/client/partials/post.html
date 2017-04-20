@@ -1,8 +1,8 @@
 <p>hi, {{user.name}}</p>
-<a style="color: blue;" ng-click="create()">Logout</a>
+<a style="color: blue;" ng-click="logout()">Logout</a>
 <a href="/#!/dashboard">Dashboard</a>
 
-<h2>{{user.name}} posted a topic:</h2>
+<h2>{{topic._user.name}} posted a topic:</h2>
 <h3>{{topic.name}}</h3>
 <h3>Description: {{topic.description}}</h3>
 <h4>Post your answer here:</h4>
@@ -12,10 +12,10 @@
 </form>
 
 <p style="color: red;">{{messages.message}}</p>
-<div ng-repeat="post in posts">
-    <p>{{post._user.name}} says: {{post.text}}</p>
-    <div ng-repeat="comment in post.comments">
-        <p>{{comment._user.name}} says: {{comment.text}}</p>
+<div ng-repeat="post in posts | orderBy: 'createdAt'">
+    <h3><span ng-bind="post._user.name"></span> posts: <span ng-bind="post.text"></span></h3>
+    <div ng-repeat="comment in post.comments | orderBy: 'createdAt'">
+        <p>{{comment._user.name}} comments: {{comment.text}}</p>
     </div>
     <form ng-submit="createcomment(post._id)">
         <textarea rows=2 cols=20 ng-model="newComment[post._id].text"></textarea>

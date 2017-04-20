@@ -1,5 +1,7 @@
 app.controller('topicController', ['$scope', 'userFactory', 'topicFactory', '$routeParams', '$location', function($scope, userFactory, topicFactory, $routeParams, $location) {
-    $scope.categories = ["HTML", "Ruby", "MEAN", "Python", "iOS"]
+    $scope.categories = ["HTML", "Ruby", "MEAN", "Python", "iOS"];
+    $scope.newTopic = {};
+    $scope.user = {};
   var index = function () {
       topicFactory.index(function(data, topic) {
           $scope.topics = data;
@@ -8,7 +10,7 @@ app.controller('topicController', ['$scope', 'userFactory', 'topicFactory', '$ro
       userFactory.index(function(data, user) {
           $scope.users = data;
           $scope.user = user;
-          if ($scope.user._id == undefined){
+          if (Object.keys($scope.user).length === 0 && $scope.user.constructor === Object){
               $location.url('/');
           }
       })
@@ -19,6 +21,10 @@ app.controller('topicController', ['$scope', 'userFactory', 'topicFactory', '$ro
   }
   $scope.create = function() {
       $scope.messages = {message: ""};
+      if (Object.keys($scope.newTopic).length === 0 && $scope.newTopic.constructor === Object){
+          $scope.messages = {message: "Need to fill out all topic inputs"}
+      }
+      else{
       $scope.newTopic._user = $scope.user._id;
       topicFactory.create($scope.newTopic, function(data) {
           if (data.name == "ValidationError"){
@@ -31,6 +37,7 @@ app.controller('topicController', ['$scope', 'userFactory', 'topicFactory', '$ro
               index();
           }
       });
+        }
   }
   $scope.remove = function(id){
       topicFactory.delete(id, function(data){
@@ -40,17 +47,11 @@ app.controller('topicController', ['$scope', 'userFactory', 'topicFactory', '$ro
            userFactory.removetopic(data);
            index();
       });
-      console.log($scope.user.topics)
   }
   $scope.gotoposts = function(id){
-      topicFactory.settopic(id, function(data){
-          index();
-      });
-      $location.url('/posts');
+    $location.url('/posts/'+id);
   }
-  // $scope.show = function(id){
-  //     productFactory.show(id, function(data){
-  //         $location.url("/show");
-  //     });
-  // }
+  $scope.gotouser = function(id){
+    $location.url('/users/'+id);
+  }
 }]);

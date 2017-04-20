@@ -6,6 +6,14 @@ app.factory('userFactory', ['$http', function($http){
             callback(returned_data.data, factory.user);
         });
     }
+    factory.logout = function(){
+        factory.user = {};
+    }
+    factory.show = function(id, callback){
+        $http.get('/users/'+id).then(function(returned_data){
+            callback(returned_data.data);
+        });
+    }
   factory.create = function(newUser, callback) {
       $http.post('/users', newUser).then(function(returned_data){
           if (typeof(callback) == 'function'){
@@ -24,14 +32,19 @@ app.factory('userFactory', ['$http', function($http){
   factory.addtopic = function(topic){
       $http.put('/users/'+topic._user, {id: topic._id});
   }
-  factory.addcomment = function(comment){
-      $http.put('/userscomment/'+comment._user, {id: comment._id});
+  factory.addcomment = function(comment, callback){
+      $http.put('/userscomment/'+comment._user, {id: comment._id}).then(function(){
+          if (typeof(callback) == 'function'){
+              callback();
+          }
+      })
   }
-  factory.addpost = function(post){
-      $http.put('/userspost/'+post._user, {id: post._id});
+  factory.addpost = function(post, callback){
+      $http.put('/userspost/'+post._user, {id: post._id}).then(function(returned_data){
+        callback(returned_data.data)
+      })
   }
   factory.removetopic = function(topic){
-      console.log(topic.deleted._id)
       $http.delete('/usertopic/'+topic.deleted._user, {id: topic.deleted._id});
   }
   return factory;

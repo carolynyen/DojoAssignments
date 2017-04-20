@@ -9,22 +9,14 @@ app.config(function ($routeProvider) {
         templateUrl:'/partials/dashboard.html',
         controller: 'topicController',
     })
-    .when('/posts', {
+    .when('/posts/:id', {
         templateUrl:'/partials/post.html',
         controller: 'postController',
     })
-    // .when('/users', {
-    //     templateUrl:'/partials/users.html',
-    //     controller: 'userController',
-    // })
-    // .when('/show', {
-    //     templateUrl:'/partials/show.html',
-    //     controller: 'productController',
-    // })
-    // .when('/settings', {
-    //     templateUrl:'/partials/settings.html',
-    //     controller: 'orderController',
-    // })
+    .when('/users/:id', {
+        templateUrl:'/partials/user.html',
+        controller: 'userController',
+    })
     .otherwise({
       redirectTo: '/'
     });

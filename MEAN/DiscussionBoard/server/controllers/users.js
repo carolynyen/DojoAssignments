@@ -13,6 +13,19 @@ module.exports = {
             }
        })
   },
+  show: function(req,res){
+      User.find({_id: req.params.id})
+      .populate([{path: 'topics', model: 'Topics'}, {path: 'posts', model: 'Posts'}, {path: 'comments', model: 'Comments'}])
+      .exec(function(err, user) {
+            if(err) {
+                console.log(err);
+                res.json(err);
+              }
+            else {
+                res.json(user[0]);
+            }
+       })
+  },
   create: function(req,res){
       User.find({name: req.body.name}, function(err, users) {
             if(err) {
@@ -66,7 +79,7 @@ module.exports = {
             if(err) {
                 res.json(err);
             } else {
-                res.json({message: "added post to user"})
+                res.json(user)
             }
         });
    });

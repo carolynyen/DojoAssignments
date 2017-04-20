@@ -3,16 +3,16 @@ var mongoose = require('mongoose');
 var Comment = mongoose.model('Comments');
 
 module.exports = {
-  index: function(req,res){
-      Comment.find({}, false, true).populate('_user').populate('_post').exec(function(err,comments){
-        if (err){
-            console.log(err);
-        }
-        else {
-            res.json(comments);
-        }
-    });
-  },
+  // index: function(req,res){
+  //     Comment.find({}, false, true).populate('_user').populate('_post').exec(function(err,comments){
+  //       if (err){
+  //           console.log(err);
+  //       }
+  //       else {
+  //           res.json(comments);
+  //       }
+  //   });
+  // },
   create: function(req,res){
       Comment.create(req.body, function(err, result){
       if(err){

@@ -1,7 +1,7 @@
 <h3>Welcome, {{user.name}}!</h3>
 <p>Dashboard</p>
 
-<p style="color:red;">{{messages.messages}}</p>
+<p style="color:red;">{{messages.message}}</p>
 
 <form ng-submit="filter()">
     Search: <input type="text" ng-model="filter_me" placeholder="search by topic name">
@@ -21,8 +21,8 @@
     <tbody ng-repeat="topic in topics | filter: filter_name">
         <tr>
             <td>{{topic.category}}</td>
-            <td ng-click="gotoposts(topic._id)">{{topic.name}}</td>
-            <td>{{topic._user.name}}</td>
+            <td style="color: blue;" ng-click="gotoposts(topic._id)">{{topic.name}}</td>
+            <td style="color: blue;" ng-click="gotouser(topic._user._id)">{{topic._user.name}}</td>
             <td>0</td>
             <td><button ng-click="remove(topic._id)">Remove</button></td>
         </tr>

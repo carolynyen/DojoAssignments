@@ -1,5 +1,8 @@
 app.controller('userController', ['$scope','userFactory', '$routeParams', '$location', function($scope, userFactory, $routeParams, $location) {
   var index = function () {
+      userFactory.show($routeParams.id, function(user) {
+          $scope.pickeduser = user;
+      })
       userFactory.index(function(data, user) {
           $scope.users = data;
           $scope.user = user;
