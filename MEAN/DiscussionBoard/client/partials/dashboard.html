@@ -1,37 +1,40 @@
+<h3>Welcome, {{user.name}}!</h3>
 <p>Dashboard</p>
-Search Products: <input type="text" ng-model="filter_name" placeholder="search..">
-<div ng-init="limit3 = 2">
+
+<p style="color:red;">{{messages.messages}}</p>
+
+<form ng-submit="filter()">
+    Search: <input type="text" ng-model="filter_me" placeholder="search by topic name">
+    <input type="submit" value="Search">
+</form>
+
 <table>
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Quantity Left</th>
+            <th>Category</th>
+            <th>Topic</th>
+            <th>User Name</th>
+            <th>Posts</th>
+            <th>Actions</th>
         </tr>
     </thead>
-    <tbody ng-repeat="product in products | filter: filter_name | limitTo: limit3">
+    <tbody ng-repeat="topic in topics | filter: filter_name">
         <tr>
-            <td>{{product.name}}</td>
-            <td><img ng-click="show(product._id)" src="{{product.image}}" height="50" width="50" alt="no image available"></td>
-            <td>{{product.qty}} left</td>
+            <td>{{topic.category}}</td>
+            <td ng-click="gotoposts(topic._id)">{{topic.name}}</td>
+            <td>{{topic._user.name}}</td>
+            <td>0</td>
+            <td><button ng-click="remove(topic._id)">Remove</button></td>
         </tr>
     </tbody>
 </table>
-</div>
-<button ng-hide="limit3 >= products.length"
-        ng-click="limit3 = limit3 + 2">show more products</button>
 
-<h3>Recent Orders</h3>
-<div ng-init="limit2 = 2">
-  <div ng-repeat="order in orders | limitTo: limit2">{{order._user.name}} purchased {{order.qty}} {{order._product.name}}... (<time am-time-ago="order.createdAt"></time>)</div>
-</div>
-<button ng-hide="limit2 >= orders.length"
-        ng-click="limit2 = limit2 + 2">show more orders</button>
-
-
-<h3>New Customers</h3>
-<div ng-init="limit = 3">
-  <div ng-repeat="user in users | limitTo: limit">{{user.name}} joined the store. (<time am-time-ago="user.createdAt"></time>)</div>
-</div>
-<button ng-hide="limit >= users.length"
-        ng-click="limit = limit + 2">show more users</button>
+<h3>Add a new topic</h3>
+<form ng-submit="create()">
+    Topic: <input name="topic" type="text" ng-model='newTopic.name'>
+    Description: <input name="topic" type="text" ng-model='newTopic.description'>
+    Category: <select ng-model="newTopic.category">
+        <option ng-repeat="category in categories" value={{category}}>{{category}}</option>
+    </select>
+    <input type="submit" value='Submit'>
+</form>

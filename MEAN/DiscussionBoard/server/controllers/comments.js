@@ -1,22 +1,20 @@
-console.log('orders controller');
+console.log('comments controller');
 var mongoose = require('mongoose');
-var User = mongoose.model('Users');
-var Product = mongoose.model('Products');
-var Order = mongoose.model('Orders');
+var Comment = mongoose.model('Comments');
 
 module.exports = {
   index: function(req,res){
-      Order.find({}, false, true).populate('_user').populate('_product').exec(function(err,orders){
+      Comment.find({}, false, true).populate('_user').populate('_post').exec(function(err,comments){
         if (err){
             console.log(err);
         }
         else {
-            res.json(orders);
+            res.json(comments);
         }
     });
   },
   create: function(req,res){
-      Order.create(req.body, function(err, result){
+      Comment.create(req.body, function(err, result){
       if(err){
         res.json(err)
       }
@@ -24,10 +22,9 @@ module.exports = {
         res.json(result)
       }
     })
-
   },
   delete: function(req,res){
-     Order.remove({_id: req.params.id}, function(err){
+     Comment.remove({_id: req.params.id}, function(err){
             if(err) {
                 console.log('nope', err);
             }

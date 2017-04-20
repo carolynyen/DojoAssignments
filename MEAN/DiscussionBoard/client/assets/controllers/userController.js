@@ -1,7 +1,8 @@
 app.controller('userController', ['$scope','userFactory', '$routeParams', '$location', function($scope, userFactory, $routeParams, $location) {
   var index = function () {
-      userFactory.index(function(data) {
+      userFactory.index(function(data, user) {
           $scope.users = data;
+          $scope.user = user;
       })
   }
   index();
@@ -18,6 +19,7 @@ app.controller('userController', ['$scope','userFactory', '$routeParams', '$loca
               $scope.messages = {message: "Added successfully"}
               $scope.newUser = {};
               index();
+              $location.url('/dashboard');
           }
       });
   }
