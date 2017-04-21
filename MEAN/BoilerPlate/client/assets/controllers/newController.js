@@ -4,6 +4,9 @@ app.controller('newController', ['$scope','friendFactory', '$location', function
       friendFactory.index(function(data) {
           $scope.friends = data;
       })
+    //   if (Object.keys($scope.user).length === 0 && $scope.user.constructor === Object){
+    //           $location.url('/');
+    //   }
   }
   index();
   $scope.create = function() {
