@@ -6,24 +6,34 @@ var Topic = mongoose.model('Topics');
 var User = mongoose.model('Users');
 
 module.exports = {
-  index: function(req,res){
-      console.log(req.params.id)
-      Topic.findOne({_id: req.params.id}, function(err, topic){
-            if(err) {
-                res.json(err);
-            } else {
-                // Post.find({}, false, true).populate([{path: 'comments',model: 'Comments', populate: {path: '_user', model: 'Users'}},
-                //           {path: '_user', model: 'Users'}]).exec(function(err, post) {
-                //           if (err) {
-                //               res.json(err);
-                //           } else {
-                //               res.json(post);
-                //           }
-                //   })
+    upvote: function(req, res){
+        Post.findOne({_id: req.params.id}, function(err, post){
+           if (post.upvotes.indexOf(req.body.id) == "-1"){
+               post.upvotes.push(req.body.id);
+               post.save(function(err){
+                   if(err) {
+                       res.json(err);
+                   } else {
+                       res.json(post)
+                   }
+               });
+           }
+       });
+    },
+    downvote: function(req, res){
+        Post.findOne({_id: req.params.id}, function(err, post){
+            if (post.downvotes.indexOf(req.body.id) == "-1"){
+                post.downvotes.push(req.body.id);
+                post.save(function(err){
+                    if(err) {
+                        res.json(err);
+                    } else {
+                        res.json(post)
+                    }
+                });
             }
-      });
-
-  },
+        });
+    },
   updatecomment: function(req, res){
       Post.findOne({_id: req.params.id}, function(err, post){
          post.comments.push(req.body.id);

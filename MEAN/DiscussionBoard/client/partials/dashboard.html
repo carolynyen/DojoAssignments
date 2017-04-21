@@ -23,7 +23,7 @@
             <td>{{topic.category}}</td>
             <td style="color: blue;" ng-click="gotoposts(topic._id)">{{topic.name}}</td>
             <td style="color: blue;" ng-click="gotouser(topic._user._id)">{{topic._user.name}}</td>
-            <td>0</td>
+            <td>{{topic.posts.length}}</td>
             <td><button ng-click="remove(topic._id)">Remove</button></td>
         </tr>
     </tbody>

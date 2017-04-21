@@ -12,19 +12,15 @@ app.factory('postFactory', ['$http', function($http){
           callback()
       })
   }
-  // factory.update = function(id, edit, callback) {
-  //     $http.put('/products/' + id, edit).then(function(returned_data) {
-  //         if (typeof(callback) == 'function'){
-  //             callback(returned_data.data);
-  //         }
-  //     })
-  // }
-  // factory.delete = function (id, callback){
-  //     $http.delete('/orders/'+id).then(function(returned_data){
-  //         if (typeof(callback) == 'function'){
-  //             callback(returned_data.data);
-  //         }
-  //     })
-  // }
+  factory.upvote = function(postid, userid, callback){
+      $http.put('/upvote/'+postid, {id: userid}).then(function(returned_data){
+          callback(returned_data.data)
+      })
+  }
+  factory.downvote = function(postid, userid, callback){
+      $http.put('/downvote/'+postid, {id: userid}).then(function(returned_data){
+          callback(returned_data.data)
+      })
+  }
   return factory;
 }]);

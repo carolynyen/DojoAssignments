@@ -14,11 +14,9 @@ module.exports = {
        })
   },
   show: function(req,res){
-      User.find({_id: req.params.id})
-      .populate([{path: 'topics', model: 'Topics'}, {path: 'posts', model: 'Posts'}, {path: 'comments', model: 'Comments'}])
-      .exec(function(err, user) {
+      User.find({_id: req.params.id}).populate('comments').populate('topics').populate('posts').exec(function(err, user) {
             if(err) {
-                console.log(err);
+                console.log('here', user);
                 res.json(err);
               }
             else {

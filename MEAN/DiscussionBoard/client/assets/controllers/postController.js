@@ -18,6 +18,16 @@ app.controller('postController', ['$scope', 'userFactory', 'topicFactory', 'post
       })
   }
   index();
+  $scope.upvote = function(postid){
+      postFactory.upvote(postid, $scope.user._id, function(data){
+          index();
+      })
+  }
+  $scope.downvote = function(postid){
+      postFactory.downvote(postid, $scope.user._id, function(data){
+          index();
+      })
+  }
   $scope.logout = function(){
       userFactory.logout();
       $location.url('/')

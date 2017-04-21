@@ -1,14 +1,23 @@
 app.controller('userController', ['$scope','userFactory', '$routeParams', '$location', function($scope, userFactory, $routeParams, $location) {
   var index = function () {
-      userFactory.show($routeParams.id, function(user) {
-          $scope.pickeduser = user;
-      })
+      if ($routeParams.id != undefined){
+          userFactory.show($routeParams.id, function(user) {
+              $scope.pickeduser = user;
+          })
+      }
       userFactory.index(function(data, user) {
           $scope.users = data;
           $scope.user = user;
+          if (Object.keys($scope.user).length === 0 && $scope.user.constructor === Object){
+              $location.url('/');
+          }
       })
   }
   index();
+  $scope.logout = function(){
+      userFactory.logout();
+      $location.url('/')
+  }
   $scope.create = function() {
       $scope.messages = {message: ""};
       userFactory.create($scope.newUser, function(data) {
@@ -19,7 +28,6 @@ app.controller('userController', ['$scope','userFactory', '$routeParams', '$loca
               $scope.messages = {message: "Username must be unique."}
           }
           else {
-              $scope.messages = {message: "Added successfully"}
               $scope.newUser = {};
               index();
               $location.url('/dashboard');

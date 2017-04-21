@@ -10,12 +10,13 @@ module.exports = function(app){
         res.sendFile('index.html', {root: __dirname + './../../client'});
     });
     app.get('/users', users.index);
-    app.get('/posts/:id', posts.index);
     app.post('/posts', posts.create);
     app.post('/comments', comments.create);
     app.post('/users', users.create);
     app.delete('/users/:id', users.delete);
     app.put('/users/:id', users.update);
+    app.put('/upvote/:id', posts.upvote);
+    app.put('/downvote/:id', posts.downvote);
     app.post('/topic', topics.show);
     app.post('/topics', topics.create);
     app.get('/topics/:id', topics.show);
